@@ -39,9 +39,29 @@ Everything is prerendered HTML. The build also emits:
 | `/manifest.webmanifest`, `/icon.svg`, `/favicon.ico`, `/apple-touch-icon.png`, `/icon-512.png` | App metadata and icons |
 | JSON-LD in `index.html` | Organization, WebSite, WebPage, Service (+ role catalog), FAQPage |
 
+## Performance
+
+Lighthouse 13, mobile profile (simulated slow 4G, 4× CPU slowdown), median of 3 runs, measured on 2026-10-01 against the previous hand-written static site:
+
+| Metric | Previous site | This repo without `strip-runtime` | **This repo (shipped)** |
+| --- | --- | --- | --- |
+| Performance score | 100 | 98 | **100** |
+| JavaScript transferred | 2.5 KB | 156.4 KB | **1.6 KB** |
+| JS execution time | 13 ms | 125 ms | **11 ms** |
+| Total transfer (gzip) | 45.7 KB | 222.8 KB | **55.0 KB** |
+| Requests | 5 | 11 | **6** |
+| Largest Contentful Paint | 1.20 s | 2.48 s | **1.35 s** |
+| Total Blocking Time | 0 ms | 22 ms | **0 ms** |
+| Cumulative Layout Shift | 0 | 0 | **0** |
+| Accessibility / Best practices / SEO | 100 / 100 / 100 | 100 / 100 / 100 | **100 / 100 / 100** |
+
+Live on laglabs.ai (same GitHub Pages CDN): LCP 1.15 s → **1.05 s**, TBT 20 ms → **0 ms**, JS 2.1 KB → **1.4 KB**.
+
+Keep it that way: no client components on marketing pages, all behaviour in `src/islands/enhance.ts` (see the design skill).
+
 ## Deploy
 
-**GitHub Pages** — `.github/workflows/pages-deploy.yml` lints, builds and publishes `out/` on every push to `main`. `public/CNAME` (`laglabs.ai`) and `public/.nojekyll` are copied into the build. In the repo's **Settings → Pages**, set the source to **GitHub Actions** and the custom domain to `laglabs.ai`.
+**GitHub Pages** (live at [laglabs.ai](https://laglabs.ai)) — `.github/workflows/pages-deploy.yml` lints, builds and publishes `out/` on every push to `main`. The repo's Pages source is **GitHub Actions** with custom domain `laglabs.ai` (HTTPS enforced); `public/CNAME` and `public/.nojekyll` are copied into the build. The repo is public (required for Pages on the free plan), so keep private material such as pricing and research out of it.
 
 DNS (Cloudflare, DNS only): `A @` → `185.199.108.153`, `.109.153`, `.110.153`, `.111.153`; `AAAA @` → `2606:50c0:8000::153` … `8003::153`; `CNAME www` → `lag-labs.github.io`.
 
