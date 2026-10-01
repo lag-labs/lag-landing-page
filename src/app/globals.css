@@ -1,0 +1,206 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "../styles/laglabs.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * laglabs design tokens — the single source of truth for colour, type and
+ * spacing. Everything new should use these (Tailwind: `bg-paper`, `text-ink`,
+ * `text-heading`, `font-mono`…; CSS: `var(--color-paper)`…).
+ * See .claude/skills/laglabs-design/SKILL.md.
+ */
+@theme {
+  /* Brand — neon azure is the main colour; use it as a fill, never as small text. */
+  --color-brand: #0095ff; /* buttons, active states, brand square, contact band */
+  --color-brand-bright: #3aa9ff; /* hover on brand fills */
+  --color-brand-strong: #0165b0; /* brand text/icons on light (AA 5.6:1), focus ring */
+  --color-brand-deep: #012f56; /* borders/marks on a brand fill */
+  --color-brand-light: #97c9fe; /* brand accents on night */
+  --color-brand-tint: #e5f2ff; /* icon tiles, soft highlights */
+  --color-on-brand: #0b1723; /* text on brand fills (AA 5.8:1) */
+
+  /* Secondary — lime marks the human / done side (checks, status, handoffs) */
+  --color-lime: #c8cc40;
+  --color-lime-dark: #6f7312;
+  --color-lime-tint: #eff1cc;
+
+  /* Tertiary */
+  --color-steel: #586a85;
+  --color-steel-tint: #e8ecf3;
+
+  /* Surfaces */
+  --color-paper: #f7f7f5;
+  --color-cream: #fefefd;
+  --color-mist: #efefec;
+  --color-night: #16191d;
+
+  /* Ink */
+  --color-ink: #1d2024;
+  --color-ink-soft: #5a5e64;
+  --color-ink-faint: #82868c;
+
+  /* Lines */
+  --color-line: #e0e0dc;
+  --color-line-strong: #cbccc8;
+
+  /* Type families */
+  --font-sans: var(--font-manrope), "Manrope", sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  /* Type scale (size / line-height / tracking) */
+  --text-display: clamp(51px, 5.72vw, 87px);
+  --text-display--line-height: 1.075;
+  --text-display--letter-spacing: -0.064em;
+  --text-heading: clamp(32px, 3.35vw, 50px);
+  --text-heading--line-height: 1.2;
+  --text-heading--letter-spacing: -0.045em;
+  --text-title: clamp(24px, 2.2vw, 33px);
+  --text-title--line-height: 1.35;
+  --text-title--letter-spacing: -0.035em;
+  --text-lead: 16px;
+  --text-lead--line-height: 1.8;
+  --text-body: 15px;
+  --text-body--line-height: 1.65;
+  --text-copy: 13px;
+  --text-copy--line-height: 1.9;
+  --text-small: 12px;
+  --text-small--line-height: 1.9;
+  --text-caption: 10px;
+  --text-caption--line-height: 1.5;
+  --text-eyebrow: 10px;
+  --text-eyebrow--line-height: 1.5;
+  --text-eyebrow--letter-spacing: 0.075em;
+  --text-micro: 8px;
+  --text-micro--line-height: 1.5;
+  --text-micro--letter-spacing: 0.05em;
+
+  /* Layout */
+  --spacing-gutter: clamp(24px, 5.55vw, 88px);
+  --spacing-section: 112px;
+  --container-page: 1312px;
+
+  /* Shape */
+  --radius-control: 5px;
+  --radius-card: 11px;
+  --radius-node: 8px;
+}
+
+/* shadcn/ui semantic tokens, mapped onto the laglabs palette. */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
+  --card: var(--color-cream);
+  --card-foreground: var(--color-ink);
+  --popover: var(--color-cream);
+  --popover-foreground: var(--color-ink);
+  --primary: var(--color-ink);
+  --primary-foreground: var(--color-cream);
+  --secondary: var(--color-mist);
+  --secondary-foreground: var(--color-ink);
+  --muted: var(--color-mist);
+  --muted-foreground: var(--color-ink-soft);
+  --accent: var(--color-brand);
+  --accent-foreground: var(--color-on-brand);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: var(--color-line);
+  --input: var(--color-line);
+  --ring: var(--color-brand-strong);
+  --chart-1: var(--color-brand);
+  --chart-2: var(--color-brand-strong);
+  --chart-3: var(--color-steel);
+  --chart-4: var(--color-lime);
+  --chart-5: var(--color-ink-soft);
+  --radius: 5px;
+  --sidebar: var(--color-mist);
+  --sidebar-foreground: var(--color-ink);
+  --sidebar-primary: var(--color-ink);
+  --sidebar-primary-foreground: var(--color-cream);
+  --sidebar-accent: var(--color-paper);
+  --sidebar-accent-foreground: var(--color-ink);
+  --sidebar-border: var(--color-line);
+  --sidebar-ring: var(--color-brand-strong);
+}
+
+/* Dark surfaces follow the "laglabs way" section palette. */
+.dark {
+  --background: var(--color-night);
+  --foreground: var(--color-paper);
+  --card: #23282e;
+  --card-foreground: var(--color-paper);
+  --popover: #23282e;
+  --popover-foreground: var(--color-paper);
+  --primary: var(--color-paper);
+  --primary-foreground: var(--color-ink);
+  --secondary: #23282e;
+  --secondary-foreground: var(--color-paper);
+  --muted: #23282e;
+  --muted-foreground: #b8bcc2;
+  --accent: #00b8cc;
+  --accent-foreground: var(--color-night);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: #2e333a;
+  --input: #3a4048;
+  --ring: #97c9fe;
+  --sidebar: var(--color-night);
+  --sidebar-foreground: var(--color-paper);
+  --sidebar-primary: #97c9fe;
+  --sidebar-primary-foreground: var(--color-night);
+  --sidebar-accent: #23282e;
+  --sidebar-accent-foreground: var(--color-paper);
+  --sidebar-border: #2e333a;
+  --sidebar-ring: #97c9fe;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
