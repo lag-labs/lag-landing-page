@@ -1,11 +1,14 @@
 /**
  * Post-build copy guard. Fails the build if published text contains a dash
- * used as punctuation: em dash (—), en dash (–), or a spaced hyphen (" - ").
+ * used as punctuation: em dash (—), en dash (–), their relatives (figure dash,
+ * horizontal bar, minus sign, two- and three-em dashes), a double hyphen
+ * ("--") or a spaced hyphen (" - ").
  * Hyphens inside words ("mid-sized", "follow-ups") are spelling and allowed.
  *
- * Checks everything a person, search engine or LLM can read: visible HTML
- * text, alt/title/aria-label/placeholder attributes, <title> and <meta>
- * content, JSON-LD, llms.txt, llms-full.txt and the web manifest.
+ * Checks everything a person, search engine or LLM can read: HTML text
+ * (including text inside SVGs), alt/title/aria-label/placeholder attributes,
+ * <title> and <meta> content, JSON-LD, llms.txt, llms-full.txt, the web
+ * manifest, and the strings in our own scripts (messages set by /enhance.js).
  *
  * Usage: bun scripts/check-copy.ts [outDir]
  */
@@ -14,7 +17,8 @@ import { join, relative } from "node:path";
 import { load } from "cheerio";
 
 const outDir = process.argv[2] ?? "out";
-const forbidden = /[—–]|(?:^|\s)-(?:\s|$)/;
+const forbidden =
+  /[\u2012-\u2015\u2212\u2e3a\u2e3b\ufe58]|(?:^|\s)(?:-{1,2}|[\u2010\u2011])(?:\s|$)|\w--\w/;
 
 async function walk(dir: string): Promise<string[]> {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -63,7 +67,7 @@ for (const file of files.filter((f) => f.endsWith(".html"))) {
     for (const attr of ["alt", "title", "aria-label", "placeholder"])
       check(file, attr, $(el).attr(attr));
   });
-  $("script, style, noscript, svg").remove();
+  $("script, style, noscript").remove();
   check(
     file,
     "text",
@@ -79,6 +83,24 @@ for (const file of files.filter((f) =>
   check(file, "file", await readFile(file, "utf8"));
 }
 
+// Our own scripts (not Next's chunks): any string may end up on the page.
+const stringLiteral = /(["'`])((?:\\.|(?!\1)[^\\\n])*)\1/g;
+for (const file of files.filter(
+  (f) => f.endsWith(".js") && !relative(outDir, f).startsWith("_next/"),
+)) {
+  for (const [, , literal] of (await readFile(file, "utf8")).matchAll(
+    stringLiteral,
+  )) {
+    check(
+      file,
+      "string",
+      literal.replace(/\\u([0-9a-f]{4})/gi, (_, hex) =>
+        String.fromCharCode(Number.parseInt(hex, 16)),
+      ),
+    );
+  }
+}
+
 if (problems.length > 0) {
   console.error(
     `check-copy: ${problems.length} forbidden dash(es) in published copy. Rewrite with a comma, colon, period or parentheses:\n  ${problems.join("\n  ")}`,
@@ -86,5 +108,5 @@ if (problems.length > 0) {
   process.exit(1);
 }
 console.log(
-  "check-copy: no em dashes, en dashes or spaced hyphens in published copy",
+  "check-copy: no dashes, double hyphens or spaced hyphens in published copy",
 );

@@ -72,18 +72,23 @@ const rscFiles = files.filter(
       htmlBases.has(file.slice(0, -"/index.txt".length))),
 );
 
-// Runtime JS chunks: nothing references them any more.
+// Runtime JS chunks: nothing references them any more. If any page keeps React
+// they all stay: chunks load each other (lazy imports, manifests), so the HTML
+// alone can't tell which ones are still needed.
 const html = (
   await Promise.all(htmlFiles.map((file) => readFile(file, "utf8")))
 ).join("\n");
-const runtimeChunks = files.filter((file) => {
-  const url = `/${relative(outDir, file)}`;
-  return (
-    url.startsWith("/_next/static/") &&
-    file.endsWith(".js") &&
-    !html.includes(url)
-  );
-});
+const runtimeChunks =
+  keepRuntime.size > 0
+    ? []
+    : files.filter((file) => {
+        const url = `/${relative(outDir, file)}`;
+        return (
+          url.startsWith("/_next/static/") &&
+          file.endsWith(".js") &&
+          !html.includes(url)
+        );
+      });
 
 await Promise.all([...rscFiles, ...runtimeChunks].map((file) => rm(file)));
 

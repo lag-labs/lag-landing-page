@@ -61,6 +61,17 @@
   [hidden] {
     display: none !important;
   }
+  /* Tabs can't switch without the enhancement script (JavaScript off, or
+     /enhance.js failed to load) or on paper, so every role panel is shown.
+     Lives in this layer to out-rank the [hidden] rule above. */
+  html:not(.js) .role-panel[hidden] {
+    display: grid !important;
+  }
+  @media print {
+    .role-panel[hidden] {
+      display: grid !important;
+    }
+  }
   h1,
   h2,
   h3,
@@ -1241,6 +1252,13 @@
     background: var(--color-brand);
     position: relative;
   }
+  /* The default brand-strong focus ring disappears on blue (2.1:1) and forest (2.4:1). */
+  .contact :focus-visible {
+    outline-color: var(--color-ink);
+  }
+  .difference :focus-visible {
+    outline-color: var(--color-brand);
+  }
   .contact-inner {
     padding-block: 46px 45px;
   }
@@ -1762,10 +1780,10 @@
     .header-inner {
       height: 71px;
     }
-    .nav-enhanced .menu-toggle {
+    .js .menu-toggle {
       display: block;
     }
-    html:not(.nav-enhanced) .header-inner {
+    html:not(.js) .header-inner {
       height: auto;
       min-height: 71px;
       padding-block: 12px;
@@ -1785,7 +1803,7 @@
     .primary-nav .button .icon {
       display: none;
     }
-    .nav-enhanced .primary-nav {
+    .js .primary-nav {
       position: absolute;
       inset: 72px 0 auto;
       padding: 23px;
@@ -1797,20 +1815,20 @@
       gap: 0;
       box-shadow: 0 25px 30px #252b2210;
     }
-    .nav-enhanced .primary-nav.is-open {
+    .js .primary-nav.is-open {
       display: flex;
     }
-    .nav-enhanced .primary-nav > a:not(.button) {
+    .js .primary-nav > a:not(.button) {
       font-size: 17px;
       padding-block: 17px;
       border-bottom: 1px solid var(--color-line);
     }
-    .nav-enhanced .primary-nav .button {
+    .js .primary-nav .button {
       min-height: 50px;
       font-size: 13px;
       margin-top: 20px;
     }
-    .nav-enhanced .primary-nav .button .icon {
+    .js .primary-nav .button .icon {
       display: block;
     }
     .menu-toggle[aria-expanded="true"] span:first-child {
@@ -2245,6 +2263,76 @@
     }
     .motion-toggle {
       display: none !important;
+    }
+  }
+
+  /* Paper and PDF: everything visible, nothing interactive, colours kept
+     (on a white page; soft shadows and glows turn into hard blocks in PDF viewers). */
+  @media print {
+    html {
+      scroll-behavior: auto;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    body {
+      background: white;
+    }
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+      box-shadow: none !important;
+    }
+    .visual-grid,
+    .workforce-visual::before {
+      display: none;
+    }
+    .site-header {
+      position: static;
+    }
+    .will-reveal {
+      opacity: 1;
+      transform: none;
+    }
+    details::details-content {
+      content-visibility: visible;
+    }
+    .faq-plus,
+    .menu-toggle,
+    .role-tabs,
+    .copy-email,
+    .back-top,
+    .motion-toggle,
+    .crosshair,
+    .workflow-dots,
+    .skip-link {
+      display: none !important;
+    }
+    /* Role panels: text beside its workflow card, so each stays on one page. */
+    .possibilities {
+      break-before: page;
+    }
+    .role-panel {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      min-height: 0;
+      padding-top: 24px;
+    }
+    .section-heading,
+    h2,
+    h3,
+    summary {
+      break-after: avoid;
+    }
+    .role-panel,
+    .process-card,
+    .principle,
+    details,
+    .difference,
+    .contact-inner,
+    .site-footer {
+      break-inside: avoid;
     }
   }
 }

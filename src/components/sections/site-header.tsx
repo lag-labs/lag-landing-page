@@ -1,12 +1,13 @@
 import { Wordmark } from "@/components/brand/primitives";
 import { PrimaryNav } from "./primary-nav";
 
-export function SiteHeader() {
+/** On pages other than home pass `base="/"` so the links lead back to it. */
+export function SiteHeader({ base }: { base?: string }) {
   return (
     <header className="site-header">
       <div className="wrap header-inner">
-        <Wordmark />
-        <PrimaryNav />
+        <Wordmark href={base} />
+        <PrimaryNav base={base} />
       </div>
     </header>
   );

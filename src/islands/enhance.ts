@@ -4,7 +4,7 @@
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-/* Mobile navigation (≤600px). `nav-enhanced` is set by an inline head script. */
+/* Mobile navigation (≤600px). The `js` class is set by an inline head script. */
 function enhanceNav() {
   const button = document.querySelector<HTMLButtonElement>(".menu-toggle");
   const nav = document.querySelector<HTMLElement>(".primary-nav");
@@ -170,8 +170,31 @@ function enhanceCopyEmail() {
   });
 }
 
-enhanceNav();
-enhanceTabs();
-enhanceMotionToggle();
-enhanceReveal();
-enhanceCopyEmail();
+/* The footer year is rendered at build time; keep it current between deploys. */
+function enhanceYear() {
+  const year = document.getElementById("year");
+  if (year) year.textContent = String(new Date().getFullYear());
+}
+
+// The menu and tabs hide content behind the `js` class. If they can't be wired
+// up, drop the class so the page falls back to its no-JavaScript layout.
+try {
+  enhanceNav();
+  enhanceTabs();
+} catch {
+  document.documentElement.classList.remove("js");
+}
+
+// Extras: one failing must not take the others down.
+for (const enhance of [
+  enhanceMotionToggle,
+  enhanceReveal,
+  enhanceCopyEmail,
+  enhanceYear,
+]) {
+  try {
+    enhance();
+  } catch {
+    // The page is complete without it.
+  }
+}

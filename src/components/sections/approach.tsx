@@ -1,5 +1,5 @@
 import { Icon } from "@/components/brand/icon";
-import { Eyebrow, Lines } from "@/components/brand/primitives";
+import { Eyebrow, Headline, Lines } from "@/components/brand/primitives";
 import { approach } from "@/lib/content";
 
 export function Approach() {
@@ -14,8 +14,7 @@ export function Approach() {
           <div>
             <Eyebrow index={approach.index}>{approach.eyebrow}</Eyebrow>
             <h2 id="approach-title">
-              You know your business. <br />
-              We make AI work in it.
+              <Headline heading={approach.heading} />
             </h2>
           </div>
           <p>

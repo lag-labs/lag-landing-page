@@ -1,6 +1,10 @@
-// All landing copy. Sections render from here, and so do the JSON-LD
-// (FAQPage, Service catalog) and /llms.txt: edit once, every surface updates.
+// All landing copy, headlines included. Sections render from here, and so do
+// the JSON-LD (FAQPage, Service catalog) and /llms.txt: edit once, every
+// surface updates.
 import type { IconName } from "@/components/brand/icon";
+
+/** A headline: lines split with <br>, plus one optional phrase to accent. */
+export type Heading = { lines: readonly string[]; accent?: string };
 
 export const nav = [
   { label: "What we build", href: "#possibilities" },
@@ -10,6 +14,7 @@ export const nav = [
 
 export const hero = {
   eyebrow: "A new kind of teammate",
+  heading: { lines: ["More ambition.", "Less busywork."], accent: "busywork" },
   description: {
     before: "Your people have bigger things to do. We build ",
     strong: "AI employees",
@@ -27,6 +32,13 @@ export const hero = {
 export const intro = {
   index: "01 /",
   eyebrow: "The opportunity",
+  heading: {
+    lines: [
+      "You don’t need more on your plate.",
+      "You need more on your side.",
+    ],
+    accent: "more on your side.",
+  },
   paragraphs: [
     "The follow-ups. The copy-paste. The work between the work. It keeps good people busy without moving your business forward.",
     "We turn those bottlenecks into AI job descriptions. Then we build the employees to fill them, with your processes, your knowledge, and your people at the center.",
@@ -229,6 +241,7 @@ export const roles: Role[] = [
 export const possibilities = {
   index: "02 /",
   eyebrow: "Meet the possibilities",
+  heading: { lines: ["Real roles.", "Real work off your plate."] },
   aside: [
     "Start with the work that slows you down.",
     "Build the AI teammate that moves it forward.",
@@ -241,6 +254,7 @@ export const possibilities = {
 export const approach = {
   index: "03 /",
   eyebrow: "From idea to everyday impact",
+  heading: { lines: ["You know your business.", "We make AI work in it."] },
   aside: [
     "One partner, from the first conversation",
     "to the work getting done.",
@@ -281,6 +295,10 @@ export const approach = {
 export const difference = {
   index: "04 /",
   eyebrow: "The laglabs way",
+  heading: {
+    lines: ["More capable.", "Still entirely you."],
+    accent: "entirely you.",
+  },
   text: "Growing your capacity shouldn’t mean losing what makes your company work. We build around your people, not around a product.",
   principles: [
     {
@@ -308,6 +326,7 @@ export const difference = {
 
 export const faq = {
   eyebrow: "A little more clarity",
+  heading: { lines: ["Good questions.", "Straight answers."] },
   cta: "Ask us something else",
   items: [
     {
@@ -339,6 +358,10 @@ export const faq = {
 
 export const contact = {
   eyebrow: "Let’s make room for what’s next",
+  heading: {
+    lines: ["What would your team do", "with more possibility?"],
+    accent: "more possibility?",
+  },
   note: "BIG IDEAS. A PRACTICAL FIRST STEP.",
   subject: "Let’s build our AI team",
   arrowLabel: "Email laglabs to discuss your AI team",

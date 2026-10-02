@@ -3,11 +3,12 @@ import { footer } from "@/lib/content";
 import { site } from "@/lib/site";
 import { MotionToggle } from "./motion";
 
-export function SiteFooter() {
+/** On pages other than home pass `base="/"` so the wordmark leads back to it. */
+export function SiteFooter({ base }: { base?: string }) {
   return (
     <footer className="site-footer">
       <div className="wrap footer-top">
-        <Wordmark />
+        <Wordmark href={base} />
         <p>{footer.tagline}</p>
         <a className="back-top" href="#top">
           Back to top <span aria-hidden="true">↑</span>

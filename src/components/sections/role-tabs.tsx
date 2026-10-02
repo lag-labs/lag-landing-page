@@ -6,7 +6,7 @@ import { mailto } from "@/lib/site";
 /**
  * WAI-ARIA tabs rendered on the server; src/islands/enhance.ts adds the
  * click/keyboard behaviour. Every panel is in the HTML so crawlers and answer
- * engines see all four roles; without JavaScript a <noscript> rule shows them all.
+ * engines see all four roles; without the script (the `js` class) CSS shows them all.
  */
 export function RoleTabs() {
   return (

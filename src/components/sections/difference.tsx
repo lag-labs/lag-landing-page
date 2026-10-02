@@ -1,5 +1,5 @@
 import { Icon } from "@/components/brand/icon";
-import { Eyebrow } from "@/components/brand/primitives";
+import { Eyebrow, Headline } from "@/components/brand/primitives";
 import { difference } from "@/lib/content";
 
 export function Difference() {
@@ -13,8 +13,7 @@ export function Difference() {
         <div className="difference-copy reveal">
           <Eyebrow index={difference.index}>{difference.eyebrow}</Eyebrow>
           <h2 id="difference-title">
-            More capable. <br />
-            Still <span>entirely you.</span>
+            <Headline heading={difference.heading} />
           </h2>
           <p>{difference.text}</p>
           <div className="human-equation" aria-hidden="true">

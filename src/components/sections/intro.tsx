@@ -1,4 +1,4 @@
-import { Eyebrow } from "@/components/brand/primitives";
+import { Eyebrow, Headline } from "@/components/brand/primitives";
 import { intro } from "@/lib/content";
 
 export function Intro() {
@@ -10,8 +10,10 @@ export function Intro() {
         </Eyebrow>
         <div className="intro-content reveal">
           <h2 id="intro-title">
-            You don’t need more on your plate. <br />
-            You need <span className="muted-ink">more on your side.</span>
+            <Headline
+              heading={intro.heading}
+              mark={(phrase) => <span className="muted-ink">{phrase}</span>}
+            />
           </h2>
           <div className="intro-bottom">
             {intro.paragraphs.map((paragraph) => (

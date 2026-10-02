@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <>
-      <SiteHeader />
+      <SiteHeader base="/" />
       <main id="main" className="section-pad">
         <div className="wrap">
           <Eyebrow index="404 /">Page not found</Eyebrow>
@@ -27,7 +27,7 @@ export default function NotFound() {
           </div>
         </div>
       </main>
-      <SiteFooter />
+      <SiteFooter base="/" />
     </>
   );
 }

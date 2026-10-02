@@ -55,6 +55,7 @@ export function structuredData() {
         inLanguage: site.language,
         isPartOf: { "@id": id("website") },
         about: { "@id": id("service") },
+        mentions: { "@id": id("process") },
         primaryImageOfPage: `${site.url}/og.png`,
         mainEntity: { "@id": id("faq") },
       },
@@ -86,10 +87,17 @@ export function structuredData() {
           name: "Email laglabs",
           target: `mailto:${site.email}`,
         },
-        additionalProperty: approach.steps.map((step, i) => ({
-          "@type": "PropertyValue",
-          name: `Step ${i + 1}: ${step.title}`,
-          value: step.text,
+      },
+      {
+        "@type": "ItemList",
+        "@id": id("process"),
+        name: "How laglabs builds an AI employee",
+        itemListOrder: "https://schema.org/ItemListOrderAscending",
+        itemListElement: approach.steps.map((step, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: step.title,
+          description: step.text,
         })),
       },
       {

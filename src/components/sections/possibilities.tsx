@@ -1,4 +1,4 @@
-import { Eyebrow, Lines } from "@/components/brand/primitives";
+import { Eyebrow, Headline, Lines } from "@/components/brand/primitives";
 import { possibilities } from "@/lib/content";
 import { RoleTabs } from "./role-tabs";
 
@@ -16,8 +16,7 @@ export function Possibilities() {
               {possibilities.eyebrow}
             </Eyebrow>
             <h2 id="possibilities-title">
-              Real roles. <br />
-              Real work off your plate.
+              <Headline heading={possibilities.heading} />
             </h2>
           </div>
           <p>

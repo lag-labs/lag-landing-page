@@ -94,7 +94,7 @@ Structured, never stiff. Editorial layouts meet useful little systems: give ever
 
 Familiar pieces, a consistent experience: an action, a card or a status should feel like it belongs to the same team.
 
-* **Actions**: primary fill `#00A9BD` with ink label, hover `#00A0B3`, focus `3px #006D7C` outline sitting 5px outside. **One primary action per group**, a clear verb, **minimum 44 × 44px target** (small text controls get an invisible 44px hit area from the `::after` rule at the top of `src/styles/laglabs.css`; add new small links or buttons to that selector list). **Links inside body text are underlined.**
+* **Actions**: primary fill `#00A9BD` with ink label, hover `#00A0B3`, focus `3px #006D7C` outline sitting 5px outside (the ring turns ink on blue panels and blue on forest, where `#006D7C` falls below 3:1). **One primary action per group**, a clear verb, **minimum 44 × 44px target** (small text controls get an invisible 44px hit area from the `::after` rule at the top of `src/styles/laglabs.css`; add new small links or buttons to that selector list). **Links inside body text are underlined.**
 * **Workflow card** anatomy (see the role panels): 01 one descriptive title with a quiet mono label; 02 warm surfaces, fine borders, generous padding; 03 blue highlights the active AI step; 04 human review is part of the story; 05 a labelled status closes the loop. Always mark it as an example (“Example workflow”, “Illustrative workflow”), never as a screenshot or a claim about a shipped product.
 
 Primitives (use these, don't reinvent):
@@ -102,14 +102,15 @@ Primitives (use these, don't reinvent):
 ```tsx
 <Eyebrow index="05 /">Section label</Eyebrow>            // mono, uppercase, brand-strong index
 <Eyebrow spark>Let’s make room for what’s next</Eyebrow>  // ✳ variant
-<h2><Lines lines={["First beat.", "Second beat."]} /></h2>
+<h2><Headline heading={section.heading} /></h2>           // { lines, accent? } from content.ts
+<p><Lines lines={["One-line support,", "split in two."]} /></p>
 <ButtonLink href="#contact">Build your AI team</ButtonLink>   // blue fill, ink label, ↗
 <ButtonLink variant="dark" size="small" href="#contact">Let’s talk</ButtonLink>
 <TextLink href={mailto("Subject")}>Ask us <Icon name="diagonal" /></TextLink>
 <StatusDot />  <Icon name="check" />  <Wordmark />
 ```
 
-shadcn/ui is themed through the token mapping in `globals.css` (primary ink, accent blue with ink text, ring `brand-strong`, radius 5px, Manrope), so `bunx shadcn@latest add …` output starts on brand. Prefer the brand primitives on marketing surfaces.
+shadcn/ui is themed through the token mapping in `globals.css` (primary ink, accent blue with ink text, ring `brand-strong`, radius 5px, Manrope), so `bunx shadcn@latest add …` output starts on brand. No shadcn components are installed (unused ones bloat the stylesheet): add one only when a page needs it, and remove it when nothing imports it. Prefer the brand primitives on marketing surfaces.
 
 ## 06 · Voice, messaging and copy rules
 
@@ -132,7 +133,7 @@ Positioning line: *laglabs builds custom AI employees for mid-sized companies, c
 
 ### Dashes are strictly forbidden
 
-**Never use an em dash (—), an en dash (–) or a hyphen used as a dash (“ - ”) in any copy**: page text, headings, buttons, alt text, aria labels, page titles, meta descriptions, Open Graph text, JSON-LD, `llms.txt`, the manifest, emails and social posts. This overrides the guide's own examples, which sometimes use an em dash.
+**Never use an em dash (—), an en dash (–) or a hyphen used as a dash (“ - ”) in any copy**: page text, headings, buttons, alt text, aria labels, page titles, meta descriptions, Open Graph text, JSON-LD, `llms.txt`, the manifest, messages set by scripts, emails and social posts. The same goes for every stand-in: a double hyphen (“--”), the figure dash, the horizontal bar and the minus sign. This overrides the guide's own examples, which sometimes use an em dash.
 
 * Rewrite instead of substituting: use a comma, a colon, a full stop (two short sentences), or parentheses.
   * ✗ “We build AI employees that take on the everyday work — so your team can take on what’s next.”
@@ -141,7 +142,7 @@ Positioning line: *laglabs builds custom AI employees for mid-sized companies, c
 * Ranges are written out: “2 to 4 weeks”, not “2–4 weeks”.
 * Hyphens **inside** words are spelling, not dashes, and stay: mid-sized, follow-ups, in-house, copy-paste.
 * Plain-text lists for machines (`llms.txt`) use `*` bullets.
-* **Enforced**: `bun run build` runs `scripts/check-copy.ts`, which fails the build and names the file and text if any published copy contains one.
+* **Enforced**: `bun run build` runs `scripts/check-copy.ts`, which fails the build and names the file and text if any published copy contains one (HTML text including SVG text, attributes, metadata, JSON-LD, `llms.txt`, the manifest and the strings in `/enhance.js`).
 
 ## 07 · In the wild
 
@@ -176,13 +177,13 @@ The guide embeds every asset so it works offline: wordmark SVGs (ink + blue, war
 | Component styles (`@layer base` / `@layer components`) | `src/styles/laglabs.css` |
 | Brand primitives | `src/components/brand/` |
 | Page sections (server components) | `src/components/sections/` |
-| All copy (also feeds JSON-LD and llms.txt) | `src/lib/content.ts` |
+| All copy, headlines included (also feeds JSON-LD and llms.txt) | `src/lib/content.ts` |
 | Site facts (name, URL, email, titles) | `src/lib/site.ts` |
 | Structured data / llms text | `src/lib/structured-data.ts` / `src/lib/llms.ts` |
 | Browser behaviour | `src/islands/enhance.ts` |
 | Post-build steps | `scripts/strip-runtime.ts`, `scripts/check-copy.ts` |
 
-Never hard-code a value a token covers: use utilities (`bg-paper`, `text-ink-soft`, `border-line`, `font-mono`, `text-heading`, `px-gutter`, `rounded-control`) or CSS vars (`var(--color-paper)`).
+Never hard-code a value a token covers: use utilities (`bg-paper`, `text-ink-soft`, `border-line`, `font-mono`, `text-heading`, `px-gutter`, `rounded-control`) or CSS vars (`var(--color-paper)`). Tailwind generates utilities from files in `src/` only.
 
 ### Runtime: no React in the browser
 
@@ -190,7 +191,8 @@ Never hard-code a value a token covers: use utilities (`bg-paper`, `text-ink-sof
 
 * **Components are server components.** Don't add `"use client"` on marketing pages: its JavaScript is stripped, so it would render but never respond.
 * **Interactivity is progressive enhancement**: render the complete, accessible initial state on the server (ARIA attributes, `hidden`, `aria-expanded`), then add an `enhanceX()` function in `src/islands/enhance.ts`. The page must work and read fully without it.
-* Only scripts with `data-keep` (and JSON-LD) survive. A page that truly needs React in the browser opts out with `export const metadata = { other: { "laglabs:runtime": "react" } }` (it brings back about 175 KB; use sparingly).
+* **The `js` class on `<html>`** is set by an inline head script before first paint and means the enhancement script is in charge. CSS that hides content for a widget (the collapsed mobile menu, inactive tab panels) must depend on it, so that with JavaScript off, or if `/enhance.js` fails to load or throws (the class is then removed), everything stays visible and reachable.
+* Only scripts with `data-keep` (and JSON-LD) survive. A page that truly needs React in the browser opts out with `export const metadata = { other: { "laglabs:runtime": "react" } }` (it brings back about 175 KB; use sparingly). While any page opts out, every runtime chunk stays in `out/`; link to and from such a page with plain `<a>`, since the static pages have no React payload.
 
 ### Section anatomy
 
@@ -200,7 +202,7 @@ Never hard-code a value a token covers: use utilities (`bg-paper`, `text-ink-sof
     <div className="section-heading reveal">
       <div>
         <Eyebrow index="0N /">Label</Eyebrow>
-        <h2 id="my-title">Short claim. <br />Second beat.</h2>
+        <h2 id="my-title"><Headline heading={mySection.heading} /></h2>
       </div>
       <p><Lines lines={["One-line support,", "split in two."]} /></p>
     </div>
@@ -212,16 +214,18 @@ Never hard-code a value a token covers: use utilities (`bg-paper`, `text-ink-sof
 * Backgrounds alternate: paper → mist band (`#e5e6dd` borders) → paper → forest → paper → blue contact panel (ink text). Never two dark or coloured bands in a row.
 * Numbered sections continue the `01 / 02 / …` index.
 * `reveal` on headings and cards below the fold only, never on the hero.
+* On any page other than home, render `<SiteHeader base="/" />` and `<SiteFooter base="/" />` so the navigation and wordmark lead back to the home sections.
+* Paper and PDF are covered by the `@media print` block at the end of `src/styles/laglabs.css` (everything revealed, all role panels and FAQ answers shown, controls hidden): extend it when a new section hides content on screen.
 * Component CSS goes in `src/styles/laglabs.css` inside `@layer components`, using tokens. Don't name a class after a Tailwind utility (`container`, `hidden`, `flex`); the layout wrapper is `.wrap` for that reason.
 
 ### Accessibility (non-negotiable)
 
-Semantic landmarks and one `h1`; `aria-labelledby` on every section; visible focus (3px `brand-strong`, 5px offset); content works without JavaScript (native `<details>`, links for navigation, every tab panel in the HTML); keyboard support for every widget; contrast at least AA (`brand-strong` for blue text, ink on blue); essential text at least 14px; touch targets at least 44 × 44px; success never shown by colour alone.
+Semantic landmarks and one `h1`; `aria-labelledby` on every section; visible focus (3px `brand-strong`, 5px offset; ink on blue, blue on forest); content works without JavaScript (native `<details>`, links for navigation, every tab panel in the HTML); keyboard support for every widget; contrast at least AA (`brand-strong` for blue text, ink on blue); essential text at least 14px; touch targets at least 44 × 44px; success never shown by colour alone.
 
 ### SEO · GEO · AEO · AIO checklist (every new page or section)
 
 1. **Static and light**: no client components, Server Actions, request-time APIs, rewrites or runtime image optimisation. Route handlers need `export const dynamic = "force-static"`.
-2. **Copy lives in `src/lib/content.ts`**, rendered as real HTML text, and follows the copy rules above (no dashes).
+2. **Copy lives in `src/lib/content.ts`** (headlines too, as `heading: { lines, accent? }` rendered with `<Headline>`), rendered as real HTML text, and follows the copy rules above (no dashes). Never retype copy in `llms.ts` or the JSON-LD: read it from content.
 3. **One question, one answer**: phrase FAQs as people ask them; answer in the first sentence, 40 to 80 words, self-contained. New FAQ items flow into the `FAQPage` JSON-LD and `llms-full.txt` automatically.
 4. **Structured data**: extend the `@graph` in `src/lib/structured-data.ts` (reference entities by `@id`); only facts that are on the page.
 5. **New page**: add `export const metadata` (title, description, `alternates.canonical`), add it to `src/app/sitemap.ts`, list it in `llmsTxt()`, link to it.

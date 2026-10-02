@@ -6,6 +6,7 @@ import {
   contact,
   difference,
   faq,
+  type Heading,
   hero,
   intro,
   possibilities,
@@ -14,6 +15,10 @@ import {
 import { site } from "@/lib/site";
 
 const description = `${hero.description.before}${hero.description.strong}${hero.description.after}`;
+
+const headline = (heading: Heading) => heading.lines.join(" ");
+// Mono labels are uppercase in content; in prose they read lowercase, AI stays AI.
+const lower = (label: string) => label.toLowerCase().replace(/\bai\b/g, "AI");
 
 export function llmsTxt() {
   return [
@@ -60,15 +65,15 @@ export function llmsFullTxt() {
     "",
     `## ${intro.eyebrow}`,
     "",
-    "You don’t need more on your plate. You need more on your side.",
+    headline(intro.heading),
     "",
     ...intro.paragraphs.flatMap((p) => [p, ""]),
-    `## ${possibilities.eyebrow}: real roles, real work off your plate`,
+    `## ${possibilities.eyebrow}`,
     "",
-    `${possibilities.aside.join(" ")} ${possibilities.foot}`,
+    `${headline(possibilities.heading)} ${possibilities.aside.join(" ")} ${possibilities.foot}`,
     "",
     ...roles.flatMap((role) => [
-      `### ${role.tab}: ${role.badge.toLowerCase()}`,
+      `### ${role.tab}: ${lower(role.badge)}`,
       "",
       `${role.headline.join(" ")} ${role.description}`,
       "",
@@ -81,15 +86,17 @@ export function llmsFullTxt() {
       `Outcome: ${role.workflow.outcome}`,
       "",
     ]),
-    `## How it works: ${approach.eyebrow.toLowerCase()}`,
+    `## How it works: ${lower(approach.eyebrow)}`,
+    "",
+    `${headline(approach.heading)} ${approach.aside.join(" ")}`,
     "",
     ...approach.steps.flatMap((step, i) => [
       `${i + 1}. ${step.title} ${step.text} (${step.deliverable})`,
     ]),
     "",
-    `## ${difference.eyebrow}: more capable, still entirely you`,
+    `## ${difference.eyebrow}`,
     "",
-    difference.text,
+    `${headline(difference.heading)} ${difference.text}`,
     "",
     ...difference.principles.map((p) => `* ${p.title} ${p.text}`),
     "",
@@ -98,7 +105,7 @@ export function llmsFullTxt() {
     ...faq.items.flatMap((item) => [`### ${item.q}`, "", item.a, ""]),
     "## Contact",
     "",
-    `${contact.body.join(" ")} Email ${site.email}.`,
+    `${headline(contact.heading)} ${contact.body.join(" ")} Email ${site.email}.`,
     "",
   ].join("\n");
 }

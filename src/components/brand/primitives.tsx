@@ -1,14 +1,21 @@
 import { type ComponentProps, Fragment, type ReactNode } from "react";
+import type { Heading } from "@/lib/content";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import { Icon } from "./icon";
 
-/** Lowercase wordmark with the brand square. */
-export function Wordmark({ className }: { className?: string }) {
+/** Lowercase wordmark with the brand square. Pass `href="/"` on pages other than home. */
+export function Wordmark({
+  className,
+  href = "#top",
+}: {
+  className?: string;
+  href?: string;
+}) {
   return (
     <a
       className={cn("wordmark", className)}
-      href="#top"
+      href={href}
       aria-label={`${site.name} home`}
     >
       {site.name}
@@ -56,6 +63,35 @@ export function Lines({ lines }: { lines: readonly ReactNode[] }) {
       {line}
     </Fragment>
   ));
+}
+
+/**
+ * Headline from content, joined like <Lines>. `accent` (a phrase inside one
+ * line) is handed to `mark` so each section can style it its own way.
+ */
+export function Headline({
+  heading,
+  mark = (phrase) => <span>{phrase}</span>,
+}: {
+  heading: Heading;
+  mark?: (phrase: string) => ReactNode;
+}) {
+  const { lines, accent } = heading;
+  return (
+    <Lines
+      lines={lines.map((line) => {
+        if (!accent || !line.includes(accent)) return line;
+        const [before, after] = line.split(accent);
+        return (
+          <>
+            {before}
+            {mark(accent)}
+            {after}
+          </>
+        );
+      })}
+    />
+  );
 }
 
 type ButtonLinkProps = ComponentProps<"a"> & {

@@ -1,5 +1,5 @@
 import { Icon } from "@/components/brand/icon";
-import { Eyebrow, Lines } from "@/components/brand/primitives";
+import { Eyebrow, Headline, Lines } from "@/components/brand/primitives";
 import { contact } from "@/lib/content";
 import { mailto, site } from "@/lib/site";
 import { CopyEmail } from "./copy-email";
@@ -16,8 +16,7 @@ export function Contact() {
         </div>
         <div className="contact-main">
           <h2 id="contact-title">
-            What would your team do <br />
-            with <span>more possibility?</span>
+            <Headline heading={contact.heading} />
           </h2>
           <a
             className="contact-arrow"

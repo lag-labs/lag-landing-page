@@ -1,5 +1,5 @@
 import { Icon } from "@/components/brand/icon";
-import { Eyebrow, TextLink } from "@/components/brand/primitives";
+import { Eyebrow, Headline, TextLink } from "@/components/brand/primitives";
 import { faq } from "@/lib/content";
 import { mailto } from "@/lib/site";
 
@@ -12,8 +12,7 @@ export function Faq() {
         <div className="reveal">
           <Eyebrow>{faq.eyebrow}</Eyebrow>
           <h2 id="faq-title">
-            Good questions. <br />
-            Straight answers.
+            <Headline heading={faq.heading} />
           </h2>
           <TextLink href={mailto()}>
             {faq.cta} <Icon name="diagonal" />

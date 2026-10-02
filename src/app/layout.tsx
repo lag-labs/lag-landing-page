@@ -69,11 +69,12 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-// Runs before first paint so the ≤600px menu collapses without a layout shift.
+// Runs before first paint: the `js` class collapses the ≤600px menu and hides
+// inactive role panels without a layout shift. If /enhance.js then fails to
+// load, the class is removed again and the page falls back to its
+// no-JavaScript layout (links visible, every role panel shown).
 // Scripts marked data-keep survive scripts/strip-runtime.ts; everything else is removed.
-const enhanceNav = `document.documentElement.classList.add("nav-enhanced")`;
-// Without JavaScript, show every role panel (tabs can't switch).
-const noScriptStyles = `@layer base{.role-panel[hidden]{display:grid!important}}`;
+const markEnhanced = `(function(c){c.add("js");addEventListener("error",function(e){var t=e.target;if(t&&t.tagName==="SCRIPT"&&t.src.indexOf("/enhance.js")>-1)c.remove("js")},true)})(document.documentElement.classList)`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -84,12 +85,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <head>
         {/* biome-ignore lint/security/noDangerouslySetInnerHtml: static, first-party snippet */}
-        <script data-keep dangerouslySetInnerHTML={{ __html: enhanceNav }} />
+        <script data-keep dangerouslySetInnerHTML={{ __html: markEnhanced }} />
         {/* All client behaviour (src/islands/enhance.ts, built by Bun). */}
         <script data-keep src="/enhance.js" defer />
-        <noscript>
-          <style>{noScriptStyles}</style>
-        </noscript>
       </head>
       <body>
         <a className="skip-link" href="#main">

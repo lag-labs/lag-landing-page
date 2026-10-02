@@ -2,6 +2,7 @@ import { Icon } from "@/components/brand/icon";
 import {
   ButtonLink,
   Eyebrow,
+  Headline,
   StatusDot,
   TextLink,
 } from "@/components/brand/primitives";
@@ -14,15 +15,17 @@ export function Hero() {
         <div className="hero-copy">
           <Eyebrow spark>{hero.eyebrow}</Eyebrow>
           <h1 id="hero-title">
-            More ambition. <br />
-            Less{" "}
-            <span className="accent-word">
-              busywork
-              <svg viewBox="0 0 430 18" aria-hidden="true">
-                <path d="M4 12C100 0 271 0 426 10" />
-              </svg>
-            </span>
-            .
+            <Headline
+              heading={hero.heading}
+              mark={(phrase) => (
+                <span className="accent-word">
+                  {phrase}
+                  <svg viewBox="0 0 430 18" aria-hidden="true">
+                    <path d="M4 12C100 0 271 0 426 10" />
+                  </svg>
+                </span>
+              )}
+            />
           </h1>
           <p className="hero-description">
             {hero.description.before}
