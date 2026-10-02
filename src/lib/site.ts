@@ -5,11 +5,11 @@ export const site = {
   email: "hello@laglabs.ai",
   locale: "en_US",
   language: "en",
-  title: "laglabs — More ambition. Less busywork.",
+  title: "laglabs | More ambition. Less busywork.",
   shortTitle: "laglabs",
   tagline: "More ambition. Less busywork.",
   description:
-    "More ambition. Less busywork. laglabs builds custom AI employees for mid-sized companies — connected to your tools, tailored to your business, and managed by us.",
+    "More ambition. Less busywork. laglabs builds custom AI employees for mid-sized companies, connected to your tools, tailored to your business, and managed by us.",
   ogDescription:
     "AI employees built around your business. Give your people the capacity to do what comes next.",
   summary:

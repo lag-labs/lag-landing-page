@@ -6,20 +6,20 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * laglabs design tokens — the single source of truth for colour, type and
+ * laglabs design tokens: the single source of truth for colour, type and
  * spacing. Everything new should use these (Tailwind: `bg-paper`, `text-ink`,
  * `text-heading`, `font-mono`…; CSS: `var(--color-paper)`…).
  * See .claude/skills/laglabs-design/SKILL.md.
  */
 @theme {
   /*
-   * laglabs brand system v1.0 (October 2026) — values from the brand guide
+   * laglabs brand system v1.0 (October 2026): values from the brand guide
    * (laglabs-tokens.css). Blue is the signal; warm neutrals do most of the work
    * (~70% light neutrals · 20% ink/forest · 10% blue).
    */
 
   /* Possibility blue */
-  --color-brand: #00a9bd; /* primary actions, brand dot, active states, blue panels — a fill, never text on light */
+  --color-brand: #00a9bd; /* primary actions, brand dot, active states, blue panels; a fill, never text on light */
   --color-brand-hover: #00a0b3; /* hover on blue fills */
   --color-brand-strong: #006d7c; /* blue text, links, chapter numbers, focus rings (5.6:1 on paper) */
   --color-brand-tint: #e0f3f4; /* quiet accent surfaces, selection */
@@ -40,7 +40,7 @@
   --color-sage-ink: #667153; /* icons on sage */
   --color-lavender: #eeebf5; /* tools & integration nodes */
   --color-lavender-ink: #817197; /* icons on lavender */
-  --color-green: #587050; /* success — always with a label or checkmark */
+  --color-green: #587050; /* success, always with a label or checkmark */
 
   /* Lines */
   --color-line: #dedfd5;
@@ -82,7 +82,7 @@
   --spacing-section: 112px;
   --container-page: 1312px;
 
-  /* Rhythm: 4px base unit — use Tailwind's spacing scale (1 = 4px) */
+  /* Rhythm: 4px base unit; use Tailwind's spacing scale (1 = 4px) */
 
   /* Motion */
   --default-transition-duration: 200ms;

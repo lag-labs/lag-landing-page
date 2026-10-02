@@ -1,5 +1,5 @@
 // All landing copy. Sections render from here, and so do the JSON-LD
-// (FAQPage, Service catalog) and /llms.txt — edit once, every surface updates.
+// (FAQPage, Service catalog) and /llms.txt: edit once, every surface updates.
 import type { IconName } from "@/components/brand/icon";
 
 export const nav = [
@@ -14,7 +14,7 @@ export const hero = {
     before: "Your people have bigger things to do. We build ",
     strong: "AI employees",
     after:
-      " that take on the everyday work — so your team can take on what’s next.",
+      " that take on the everyday work, so your team can take on what’s next.",
   },
   primaryCta: "Build your AI team",
   secondaryCta: "See what’s possible",
@@ -29,7 +29,7 @@ export const intro = {
   eyebrow: "The opportunity",
   paragraphs: [
     "The follow-ups. The copy-paste. The work between the work. It keeps good people busy without moving your business forward.",
-    "We turn those bottlenecks into AI job descriptions. Then we build the employees to fill them — with your processes, your knowledge, and your people at the center.",
+    "We turn those bottlenecks into AI job descriptions. Then we build the employees to fill them, with your processes, your knowledge, and your people at the center.",
   ],
 };
 
@@ -254,7 +254,7 @@ export const approach = {
     },
     {
       title: "Build your teammate.",
-      text: "We shape the AI around your knowledge, connect your tools, and define what it can do — and when to ask.",
+      text: "We shape the AI around your knowledge, connect your tools, and define what it can do and when to ask.",
       deliverable: "Built for your reality",
       icon: "diagonal",
     },

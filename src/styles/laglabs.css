@@ -1,5 +1,5 @@
 /*
- * laglabs component styles — ported 1:1 from the original static landing
+ * laglabs component styles, ported 1:1 from the original static landing
  * (temporary-landing/styles.css). Values are intentional; colours reference the
  * tokens declared in src/app/globals.css.
  *
@@ -1160,7 +1160,7 @@
     color: #bec3b7;
   }
 
-  /* FAQ — native <details> works without JavaScript. */
+  /* FAQ: native <details> works without JavaScript. */
   .faq-grid {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
@@ -1269,7 +1269,7 @@
     line-height: 1.22;
     letter-spacing: -0.05em;
   }
-  /* Ink on blue only — white on blue is 2.8:1, even for large headlines. */
+  /* Ink on blue only: white on blue is 2.8:1, even for large headlines. */
   .contact-arrow {
     display: grid;
     place-items: center;

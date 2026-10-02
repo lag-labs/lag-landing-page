@@ -1,4 +1,4 @@
-# laglabs — landing page
+# laglabs | landing page
 
 Website for [laglabs.ai](https://laglabs.ai): custom AI employees for mid-sized companies.
 
@@ -7,7 +7,7 @@ Next.js 16 (App Router, **static export**) · Tailwind CSS v4 · shadcn/ui (Base
 ```bash
 bun install
 bun dev            # http://localhost:3000
-bun run build      # static site in out/ (islands → next build → strip-runtime)
+bun run build      # static site in out/ (islands → next build → strip-runtime → check-copy)
 bun run lint       # biome check
 bun run lint:fix   # biome check --write
 ```
@@ -16,15 +16,16 @@ Preview the production build: `python3 -m http.server -d out 4174`.
 
 ## Structure
 
-- `src/lib/content.ts` — all page copy. Sections, JSON-LD and `llms.txt` render from it.
-- `src/lib/site.ts` — name, URL, email, descriptions.
-- `src/components/sections/` — page sections (all server components).
-- `src/islands/enhance.ts` — the only browser JavaScript (menu, tabs, copy button, reveals, motion toggle), bundled by Bun to `/enhance.js`.
-- `scripts/strip-runtime.ts` — post-build step that removes the React/Next runtime from the export (≈1.3 KB of JS shipped instead of ≈200 KB).
-- `src/components/brand/` — brand primitives (icons, wordmark, eyebrow, buttons, links).
-- `src/app/globals.css` — design tokens and shadcn theme mapping; `src/styles/laglabs.css` — component styles.
-- `.claude/skills/laglabs-design/SKILL.md` — **the design language**: tokens, primitives, section anatomy, voice, motion, a11y and the SEO/GEO/AEO checklist. Read it before adding anything.
-- `docs/` — brand & messaging rationale.
+- `src/lib/content.ts`: all page copy. Sections, JSON-LD and `llms.txt` render from it.
+- `src/lib/site.ts`: name, URL, email, descriptions.
+- `src/components/sections/`: page sections (all server components).
+- `src/islands/enhance.ts`: the only browser JavaScript (menu, tabs, copy button, reveals, motion toggle), bundled by Bun to `/enhance.js`.
+- `scripts/check-copy.ts`: post-build guard that fails if published copy contains an em dash, en dash or spaced hyphen (forbidden by the copy rules).
+- `scripts/strip-runtime.ts`: post-build step that removes the React/Next runtime from the export (≈1.3 KB of JS shipped instead of ≈200 KB).
+- `src/components/brand/`: brand primitives (icons, wordmark, eyebrow, buttons, links).
+- `src/app/globals.css`: design tokens and shadcn theme mapping; `src/styles/laglabs.css`: component styles.
+- `.claude/skills/laglabs-design/SKILL.md`: **the design language**: tokens, primitives, section anatomy, voice, motion, a11y and the SEO/GEO/AEO checklist. Read it before adding anything.
+- `docs/brand-guidelines.html`: the laglabs brand guidelines v1.0, source of truth for design and voice. `docs/brand-and-messaging-research.md`: messaging rationale.
 
 ## Search & answer engines
 
@@ -61,11 +62,11 @@ Keep it that way: no client components on marketing pages, all behaviour in `src
 
 ## Deploy
 
-**GitHub Pages** (live at [laglabs.ai](https://laglabs.ai)) — `.github/workflows/pages-deploy.yml` lints, builds and publishes `out/` on every push to `main`. The repo's Pages source is **GitHub Actions** with custom domain `laglabs.ai` (HTTPS enforced); `public/CNAME` and `public/.nojekyll` are copied into the build. The repo is public (required for Pages on the free plan), so keep private material such as pricing and research out of it.
+**GitHub Pages** (live at [laglabs.ai](https://laglabs.ai)). `.github/workflows/pages-deploy.yml` lints, builds and publishes `out/` on every push to `main`. The repo's Pages source is **GitHub Actions** with custom domain `laglabs.ai` (HTTPS enforced); `public/CNAME` and `public/.nojekyll` are copied into the build. The repo is public (required for Pages on the free plan), so keep private material such as pricing and research out of it.
 
 DNS (Cloudflare, DNS only): `A @` → `185.199.108.153`, `.109.153`, `.110.153`, `.111.153`; `AAAA @` → `2606:50c0:8000::153` … `8003::153`; `CNAME www` → `lag-labs.github.io`.
 
-**Docker** — static files served by nginx:
+**Docker**: static files served by nginx:
 
 ```bash
 docker build -t lag-landing-page .
@@ -78,4 +79,4 @@ All CTAs are `mailto:` links to **hello@laglabs.ai** (no form backend, no tracki
 
 ## Credits
 
-Font: [Manrope](https://github.com/sharanda/manrope), SIL Open Font License — see `src/fonts/OFL-Manrope.txt`. The static TTF weights in `src/fonts/` (used only for the OG image) are instances of the same font.
+Font: [Manrope](https://github.com/sharanda/manrope), SIL Open Font License: see `src/fonts/OFL-Manrope.txt`. The static TTF weights in `src/fonts/` (used only for the OG image) are instances of the same font.

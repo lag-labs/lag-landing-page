@@ -1,4 +1,4 @@
-// Progressive enhancement for the static site — the only JavaScript shipped.
+// Progressive enhancement for the static site: the only JavaScript shipped.
 // Bundled by Bun to /enhance.js (see `islands` in package.json). Everything
 // here enhances server-rendered markup; the page is complete without it.
 
@@ -109,7 +109,7 @@ function enhanceMotionToggle() {
   });
 }
 
-/* Fade `.reveal` blocks in on scroll — never hides content already in view. */
+/* Fade `.reveal` blocks in on scroll; never hides content already in view. */
 function enhanceReveal() {
   if (!("IntersectionObserver" in window) || reducedMotion.matches) return;
 
