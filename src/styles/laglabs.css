@@ -2310,7 +2310,8 @@
       display: none !important;
     }
     /* Role panels: text beside its workflow card, so each stays on one page. */
-    .possibilities {
+    .possibilities,
+    .faq {
       break-before: page;
     }
     .role-panel {
@@ -2325,6 +2326,7 @@
     summary {
       break-after: avoid;
     }
+    .workforce-visual,
     .role-panel,
     .process-card,
     .principle,
