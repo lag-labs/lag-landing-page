@@ -27,7 +27,7 @@ export const site = {
     "AI customer support",
     "AI research analyst",
   ],
-  themeColor: "#f7f7f5",
+  themeColor: "#f8f7f3",
 } as const;
 
 export function mailto(subject?: string) {

@@ -96,7 +96,7 @@ function WorkforceVisual() {
         <circle cx="185" cy="400" r="4" fill="#a3aeb2" />
       </svg>
       <div className="visual-node request-node" aria-hidden="true">
-        <span className="node-icon tile-brand">
+        <span className="node-icon tile-blue">
           <Icon name="mail" />
         </span>
         <div>
@@ -105,7 +105,7 @@ function WorkforceVisual() {
         </div>
       </div>
       <div className="visual-node context-node" aria-hidden="true">
-        <span className="node-icon tile-lime">
+        <span className="node-icon tile-sage">
           <Icon name="file" />
         </span>
         <div>
@@ -114,7 +114,7 @@ function WorkforceVisual() {
         </div>
       </div>
       <div className="visual-node tools-node" aria-hidden="true">
-        <span className="node-icon tile-steel">
+        <span className="node-icon tile-lavender">
           <Icon name="grid" />
         </span>
         <div>

@@ -64,7 +64,7 @@ type ButtonLinkProps = ComponentProps<"a"> & {
   icon?: boolean;
 };
 
-/** Primary call-to-action. Brand teal for the main action, dark for navigation. */
+/** Primary call-to-action. Possibility blue for the main action, dark for navigation. */
 export function ButtonLink({
   variant = "brand",
   size = "default",
@@ -77,7 +77,7 @@ export function ButtonLink({
     <a
       className={cn(
         "button",
-        variant === "brand" ? "button-brand" : "button-dark",
+        variant === "brand" ? "button-primary" : "button-dark",
         size === "small" && "button-small",
         className,
       )}

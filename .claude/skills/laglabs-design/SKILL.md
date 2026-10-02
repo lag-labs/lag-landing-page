@@ -5,6 +5,8 @@ description: The laglabs design language and page conventions for this repo — 
 
 # laglabs design language
 
+**Source of truth: the laglabs brand guidelines v1.0 — `docs/brand-guidelines.html`** (open it in a browser; logos, font and `laglabs-tokens.css` are downloadable from its toolkit section). This skill is how that guide is implemented in this repo. If the two ever disagree, the guide wins — fix the code.
+
 The site is a **fully static** Next.js export (`output: "export"`) styled with Tailwind v4 + shadcn/ui, rendered from typed content. Everything new must look like it was always there: same tokens, same primitives, same rhythm, same voice.
 
 ## Where things live
@@ -20,49 +22,53 @@ The site is a **fully static** Next.js export (`output: "export"`) styled with T
 | Structured data | `src/lib/structured-data.ts` |
 | llms.txt / llms-full.txt text | `src/lib/llms.ts` |
 | Font (Manrope variable, self-hosted) + OFL | `src/fonts/` |
+| Brand guidelines (source of truth) | `docs/brand-guidelines.html` |
 | Brand + messaging rationale | `docs/brand-and-messaging-research.md` |
+| Brand symbol (favicon, avatars) | `public/icon.svg`; raster copies via `src/lib/brand-mark.tsx` |
 
 ## Tokens — never hard-code a new value if a token fits
 
 Use them as Tailwind utilities (`bg-paper`, `text-ink-soft`, `border-line`, `font-mono`, `text-heading`, `px-gutter`, `rounded-control`) or as CSS vars (`var(--color-paper)`).
 
-**Colour** — the brand colour is **neon azure `#0095ff`**: it has the same lightness and saturation (OKLCH L 0.66 / C 0.19) as the original orange, so it carries the same punch. Neutrals are deliberately neutral (no blue cast) so the brand is the only cool, saturated thing on the page; lime is the secondary.
+**Colour** — the guide's palette: **possibility blue `#00A9BD`** on a warm foundation. Use roughly **70% light neutrals · 20% ink/forest · 10% blue** per composition (a starting point, not a quota; a focused campaign panel can go all blue).
 
-| Token | Hex | Use |
+| Token | Hex | Guide name · use |
 | --- | --- | --- |
-| `brand` | `#0095ff` | **Main colour.** Primary CTA fill, brand square, active tab, AI core, flow dots, step highlight, contact band |
-| `brand-bright` | `#3aa9ff` | Hover on brand fills |
-| `brand-strong` | `#0165b0` | Brand **text/icons** on light (5.6:1), section index, highlighted headline word, link hover, focus ring |
-| `brand-deep` | `#012f56` | Borders/marks drawn on a `brand` fill |
-| `brand-light` | `#97c9fe` | Brand accents on `night` (index, headline highlight) |
-| `brand-tint` | `#e5f2ff` | Icon tiles, soft brand backgrounds |
-| `on-brand` | `#0b1723` | Text on `brand` fills (5.8:1) |
-| `lime` · `lime-dark` · `lime-tint` | `#c8cc40` · `#6f7312` · `#eff1cc` | Secondary: the **human / done** side (check icons, status dots, handoff tags, outcome boxes) |
-| `steel` · `steel-tint` | `#586a85` · `#e8ecf3` | Tertiary icon tile |
-| `paper` | `#f7f7f5` | Page background (neutral off-white) |
-| `cream` | `#fefefd` | Raised surfaces: cards, nodes, bullets |
-| `mist` | `#efefec` | Alternate section band |
-| `night` | `#16191d` | Dark section ("The laglabs way") |
-| `ink` · `ink-soft` · `ink-faint` | `#1d2024` · `#5a5e64` · `#82868c` | Text, body copy, de-emphasised half of a headline |
-| `line` · `line-strong` | `#e0e0dc` · `#cbccc8` | 1px rules and borders |
+| `brand` | `#00a9bd` | Primary blue · primary actions, brand dot, active tab, active AI step, blue panels. **A fill — never text on light** |
+| `brand-hover` | `#00a0b3` | Hover on blue fills |
+| `brand-strong` | `#006d7c` | Blue strong · blue text, links, chapter numbers (`01 /`), focus rings (5.6:1 on paper) |
+| `brand-tint` | `#e0f3f4` | Blue tint · quiet accent surfaces, selection, AI icon tiles |
+| `paper` | `#f8f7f3` | Paper · primary background |
+| `cream` | `#fffefa` | Warm white · cards & raised surfaces |
+| `mist` | `#eeefe8` | Alternate section band |
+| `ink` | `#242820` | Ink · headlines, body, and **all text on blue** |
+| `ink-soft` | `#62665c` | Muted · secondary text |
+| `ink-faint` | `#858979` | De-emphasised half of a headline |
+| `forest` | `#252b22` | Forest · dark feature sections |
+| `sage` (+ `sage-ink` `#667153`) | `#e9efdf` | Sage · **human & knowledge** nodes, outcome boxes |
+| `lavender` (+ `lavender-ink` `#817197`) | `#eeebf5` | Lavender · **tools & integration** nodes |
+| `green` | `#587050` | Success · status dots, checks — always with a label or checkmark, never colour alone |
+| `line` · `line-strong` | `#dedfd5` · `#cdd0c3` | 1px warm-gray borders and rules |
 
-Derived colours (connector strokes, glows, selection, contact-band borders) are `color-mix()`ed from `brand` in `src/styles/laglabs.css`, so **changing the brand is one edit in `globals.css`** — plus the raster copies in `public/icon.svg`, `src/lib/brand-mark.tsx` and `src/app/og.png/route.tsx` (Satori/SVG can't read CSS variables).
+Contrast rules (from the guide): **white on blue is only 2.8:1 — use ink instead, including in large headlines.** Blue is never text on paper (2.6:1): use `brand-strong`. On `forest`: text `#bec3b7`, headline accent `#c0cbae`, chapter number `brand` (5.1:1), borders `#464e3d`. On blue panels: ink text, ink wordmark dot, `#24282088` outlines.
 
-Contrast rules: `brand` is a **fill**, never small text on light (2.9:1) — use `brand-strong`. On a `brand` fill, small text is `on-brand`/ink; **white is allowed only for large text** (≥24px or ≥19px bold: 3.1:1), e.g. the contact headline highlight. On `night`: text `#b8bcc2`, highlights `brand-light`, borders `#2e333a`.
+Diagram colour roles: **blue = the active AI step**, sage = people/knowledge, lavender = tools, green = done. Show the work, not the sci-fi: no robots, **no neon glows**, no decorative complexity.
 
-The brand colour is the signature, used with intent: one primary CTA per view, one highlighted word per headline at most. Brand = AI/action, lime = people/done — keep that mapping in illustrations.
+**Logo & symbol** — always `laglabs`, one lowercase word, with the square dot attached (`<Wordmark />`). Minimum width **100px** digital (31px font ≈ 106px), clear space ≥ 1× the “l” height. The **symbol** is a blue tile with an **ink** asterisk (`public/icon.svg`) for favicons, avatars and diagrams; minimum tile 24px. No shadows, outlines, gradients or new icon + wordmark lockups.
 
-**Type** — Manrope (`font-sans`) for everything; system mono (`font-mono`) only for small uppercase labels, indices, tags and captions.
+**Type** — Manrope (`font-sans`, Arial fallback): **400/500/600 for layouts, 800 only for the wordmark**. System mono (`font-mono`) only for chapter numbers, eyebrows and technical metadata — never paragraphs or the wordmark. Headlines short, sentence case, focused on the outcome.
+
+**Keep essential content at 14px or larger** (prose, lists, FAQ, nav, tabs, buttons, links). Below 14px is only for short supplementary text: mono labels, tags, captions, footer small print, and the illustrative workflow card (which uses the guide's own component sizes).
 
 | Token | Size | LH / tracking | Use |
 | --- | --- | --- | --- |
-| `text-display` | clamp(51–87px) | 1.075 / −0.064em | h1 only, weight 500, `nowrap` |
+| `text-display` | clamp(51–87px); 39–59px on mobile | 1.075 / −0.064em | h1 only, weight 500, `nowrap` |
 | `text-heading` | clamp(32–50px) | 1.2 / −0.045em | h2 |
 | `text-title` | clamp(24–33px) | 1.35 / −0.035em | h3 in feature panels |
 | `text-lead` | 16px | 1.8 | Hero description |
 | `text-body` | 15px | 1.65 | Default |
-| `text-copy` | 13px | 1.9 | Section paragraphs |
-| `text-small` | 12px | 1.9 | Card copy, links, nav |
+| `text-copy` | 14px | 1.9 | Section paragraphs |
+| `text-small` | 14px | 1.9 | Card copy, links, nav |
 | `text-caption` | 10px | 1.5 | Notes, footnotes |
 | `text-eyebrow` | 10px mono | +0.075em, uppercase | Eyebrows |
 | `text-micro` | 8px mono | +0.05em, uppercase | Badges, tags, deliverables |
@@ -71,7 +77,9 @@ Headings are weight **500** (never bold), tight negative tracking, and usually *
 
 **Layout** — content width `min(100% − 2×gutter, 1312px)` via `.wrap`; `--gutter` is clamp(24–88px) and steps to 40/30/23px at 1100/800/600. Sections use `.section-pad` (112 → 78 → 66px). Breakpoints are **1100, 800, 600px** (max-width) plus 1550px min-width for the hero.
 
-**Shape** — buttons `5px` (`rounded-control`), illustration nodes `8px`, cards `11px`, icon tiles `6–7px`, tags `3px`, avatars/dots round. Borders are 1px `line`; shadows are barely there (`0 12px 30px #262b1904`).
+**Rhythm** — 4px base unit (Tailwind spacing `1` = 4px): 24px inside cards, 32–48px between groups, 64–112px between sections.
+
+**Shape** — buttons `5px` (`rounded-control`), cards `8px` (`rounded-node`), larger workflow panels `11px` (`rounded-card`), icon tiles `6–7px`, tags `3px`, avatars/dots round. Borders are 1px warm-gray `line`; shadows subtle and functional (`0 12px 30px #262b1904`).
 
 ## Primitives (use these, don't re-invent)
 
@@ -79,7 +87,7 @@ Headings are weight **500** (never bold), tight negative tracking, and usually *
 <Eyebrow index="05 /">Section label</Eyebrow>        // mono, uppercase, brand-strong index
 <Eyebrow spark>Let’s make room for what’s next</Eyebrow> // brand ✳ variant
 <h2><Lines lines={["First beat.", "Second beat."]} /></h2>
-<ButtonLink href="#contact">Build your AI team</ButtonLink>          // brand fill, ↗ icon
+<ButtonLink href="#contact">Build your AI team</ButtonLink>          // blue fill, ink label, ↗ icon
 <ButtonLink variant="dark" size="small" href="#contact">Let’s talk</ButtonLink>
 <TextLink href={mailto("Subject")}>Ask us <Icon name="diagonal" /></TextLink>
 <StatusDot />  <Icon name="check" />  <Wordmark />
@@ -87,7 +95,9 @@ Headings are weight **500** (never bold), tight negative tracking, and usually *
 
 Icons: 24×24 grid, 1.6 stroke, round caps/joins, no fill, always decorative (`aria-hidden`); the control carries the label. Add new ones as `<symbol id="i-name">` in `src/components/brand/icon.tsx` and extend `IconName`. The CTA arrow is always `diagonal` (↗), never a chevron.
 
-shadcn/ui components are themed through the token mapping (primary = ink, accent = brand, ring = brand-strong, radius 5px, Manrope), so `bunx shadcn@latest add …` output is on-brand by default. Prefer brand primitives on marketing surfaces; use shadcn for app-like UI (dialogs, forms, menus).
+Actions (guide): **one primary action per group**, a clear verb, **minimum 44 × 44px target** (small text controls get an invisible 44px hit area via the `::after` rule at the top of `laglabs.css` — add new small links/buttons to that selector list). Links inside body text are underlined.
+
+shadcn/ui components are themed through the token mapping (primary = ink, accent = blue with ink text, ring = brand-strong, radius 5px, Manrope), so `bunx shadcn@latest add …` output is on-brand by default. Prefer brand primitives on marketing surfaces; use shadcn for app-like UI (dialogs, forms, menus).
 
 ## Runtime: no React in the browser
 
@@ -118,12 +128,14 @@ Every section follows the same skeleton:
 </section>
 ```
 
-- Alternate backgrounds: paper → mist band (with `#e2e8e9` top/bottom borders) → paper → night → paper → brand (contact). Never two dark/coloured bands in a row.
+- Alternate backgrounds: paper → mist band (with `#e5e6dd` top/bottom borders) → paper → forest → paper → blue (contact, ink text). Never two dark/coloured bands in a row.
 - Numbered sections continue the `01 / 02 / …` index in order.
 - Put `reveal` on blocks that should fade up on scroll (headings, cards). Never on the hero or anything above the fold.
 - Component CSS goes in `src/styles/laglabs.css` inside `@layer components`, using tokens; or use Tailwind utilities with tokens. Don't name a class after a Tailwind utility (`container`, `hidden`, `flex`…). The layout wrapper is `.wrap` for that reason.
 
 ## Voice
+
+Sound like a partner, not a pitch: lead with human ambition, explain the technology through the work it helps people do. Write **AI** in capitals and **laglabs** in lowercase. Language to build on: AI employees · AI teammates · your people · built around your business · more capacity. Avoid: “Replace your workforce…”, “Revolutionize…”, “Guaranteed 10×…”.
 
 - Short, two-beat lines with a turn: "More ambition. Less busywork." / "You know your business. We make AI work in it."
 - Second person, warm, plain. "Your people", "your tools", "your rules". AI is a **teammate/employee**, people stay **in control**.
@@ -133,11 +145,11 @@ Every section follows the same skeleton:
 
 ## Motion
 
-Subtle and optional: scroll reveals (`.reveal` → `RevealOnScroll`), the flowing dots and slowly turning mark in the hero, a 0.3s panel fade. Everything is disabled under `prefers-reduced-motion` and pausable with the footer motion toggle. Never animate layout, never hide above-the-fold content, never autoplay anything else.
+200ms transitions for controls (Tailwind default duration is set to 200ms) and a subtle 1–2px arrow shift. Diagram animation must explain a flow. Subtle and optional: scroll reveals (`.reveal`, wired in `src/islands/enhance.ts`), the flowing dots and slowly turning mark in the hero, a 0.3s panel fade. Everything is disabled under `prefers-reduced-motion` and pausable with the footer motion toggle. Never animate layout, never hide above-the-fold content, never autoplay anything else.
 
 ## Accessibility (non-negotiable)
 
-Semantic landmarks and one `h1`; `aria-labelledby` on every section; visible focus (`3px brand-strong`, 5px offset); content must work without JavaScript (native `<details>`, links not buttons for navigation, all tab panels in the HTML); keyboard support for any widget (use Base UI primitives — they handle it); colour contrast ≥ AA (`brand-strong` for brand-coloured text on light, `on-brand` for text on brand fills).
+Semantic landmarks and one `h1`; `aria-labelledby` on every section; visible focus (`3px brand-strong`, 5px offset); content must work without JavaScript (native `<details>`, links not buttons for navigation, all tab panels in the HTML); keyboard support for any widget (implemented in `src/islands/enhance.ts`); colour contrast ≥ AA (`brand-strong` for blue text on light, ink for any text on blue); essential text ≥ 14px; touch targets ≥ 44 × 44px.
 
 ## SEO · GEO · AEO · AIO checklist (for every new page or section)
 

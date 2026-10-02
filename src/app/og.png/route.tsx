@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { symbolDataUri } from "@/lib/brand-mark";
 import { site } from "@/lib/site";
 
 // Served as /og.png (a real extension, so static hosts send image/png).
@@ -12,12 +13,12 @@ const font = (weight: number) =>
   readFile(join(process.cwd(), `src/fonts/manrope-${weight}.ttf`));
 
 // Brand values duplicated from the design tokens (Satori can't read CSS vars).
-const paper = "#f7f7f5";
-const ink = "#1d2024";
-const muted = "#5a5e64";
-const brand = "#0095ff";
-const brandStrong = "#0165b0";
-const line = "#e0e0dc";
+const paper = "#f8f7f3";
+const ink = "#242820";
+const muted = "#62665c";
+const brand = "#00a9bd";
+const brandStrong = "#006d7c";
+const line = "#dedfd5";
 
 export async function GET() {
   const [medium, semibold, extrabold] = await Promise.all([
@@ -106,31 +107,14 @@ export async function GET() {
             .
           </div>
         </div>
-        <div
-          style={{
-            width: 210,
-            height: 210,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: 50,
-            background: brand,
-            transform: "rotate(-8deg)",
-          }}
-        >
-          <svg
-            width="96"
-            height="96"
-            viewBox="0 0 64 64"
-            role="img"
-            aria-label="laglabs mark"
-          >
-            <path
-              d="M27 3h10v19l13.4-13.4 7 7L44 29h19v10H44l13.4 13.4-7 7L37 46v18H27V46L13.6 59.4l-7-7L20 39H1V29h19L6.6 15.6l7-7L27 22Z"
-              fill="#ffffff"
-            />
-          </svg>
-        </div>
+        {/* biome-ignore lint/performance/noImgElement: Satori renders plain <img> */}
+        <img
+          src={symbolDataUri()}
+          width={210}
+          height={210}
+          alt="laglabs symbol"
+          style={{ transform: "rotate(-8deg)" }}
+        />
       </div>
 
       <div

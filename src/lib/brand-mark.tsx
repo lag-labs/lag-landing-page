@@ -1,36 +1,23 @@
 import { ImageResponse } from "next/og";
 
-// Raster versions of public/icon.svg (Satori can't read CSS vars, so the
-// brand hexes are repeated here — keep in sync with the tokens).
-const brand = "#0095ff";
-const mark = "#ffffff";
-const markPath =
-  "M27 3h10v19l13.4-13.4 7 7L44 29h19v10H44l13.4 13.4-7 7L37 46v18H27V46L13.6 59.4l-7-7L20 39H1V29h19L6.6 15.6l7-7L27 22Z";
+// The brand-guide symbol (blue tile, ink asterisk), identical to public/icon.svg.
+// Satori can't read CSS variables, so the guide hexes are repeated here.
+const symbol = (rx: number) =>
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><rect width="80" height="80" rx="${rx}" fill="#00a9bd"/><g transform="translate(8 7)" fill="#242820"><path d="M27 3h10v19l13.4-13.4 7 7L44 29h19v10H44l13.4 13.4-7 7L37 46v18H27V46L13.6 59.4l-7-7L20 39H1V29h19L6.6 15.6l7-7L27 22Z"/></g></svg>`;
 
-/** Square brand mark as a PNG. `rounded` follows the favicon; Apple adds its own mask. */
+export const symbolDataUri = (rx = 20) =>
+  `data:image/svg+xml;base64,${Buffer.from(symbol(rx)).toString("base64")}`;
+
+/** Square brand symbol as a PNG. Apple applies its own mask, so it gets square corners. */
 export function markImage(size: number, { rounded = true } = {}) {
   return new ImageResponse(
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: brand,
-        borderRadius: rounded ? size / 4 : 0,
-      }}
-    >
-      <svg
-        width={size * 0.64}
-        height={size * 0.64}
-        viewBox="0 0 64 64"
-        role="img"
-        aria-label="laglabs"
-      >
-        <path d={markPath} fill={mark} />
-      </svg>
-    </div>,
+    // biome-ignore lint/performance/noImgElement: Satori renders plain <img>
+    <img
+      src={symbolDataUri(rounded ? 20 : 0)}
+      width={size}
+      height={size}
+      alt="laglabs"
+    />,
     { width: size, height: size },
   );
 }

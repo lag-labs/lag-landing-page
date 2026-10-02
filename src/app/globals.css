@@ -12,41 +12,42 @@
  * See .claude/skills/laglabs-design/SKILL.md.
  */
 @theme {
-  /* Brand — neon azure is the main colour; use it as a fill, never as small text. */
-  --color-brand: #0095ff; /* buttons, active states, brand square, contact band */
-  --color-brand-bright: #3aa9ff; /* hover on brand fills */
-  --color-brand-strong: #0165b0; /* brand text/icons on light (AA 5.6:1), focus ring */
-  --color-brand-deep: #012f56; /* borders/marks on a brand fill */
-  --color-brand-light: #97c9fe; /* brand accents on night */
-  --color-brand-tint: #e5f2ff; /* icon tiles, soft highlights */
-  --color-on-brand: #0b1723; /* text on brand fills (AA 5.8:1) */
+  /*
+   * laglabs brand system v1.0 (October 2026) — values from the brand guide
+   * (laglabs-tokens.css). Blue is the signal; warm neutrals do most of the work
+   * (~70% light neutrals · 20% ink/forest · 10% blue).
+   */
 
-  /* Secondary — lime marks the human / done side (checks, status, handoffs) */
-  --color-lime: #c8cc40;
-  --color-lime-dark: #6f7312;
-  --color-lime-tint: #eff1cc;
+  /* Possibility blue */
+  --color-brand: #00a9bd; /* primary actions, brand dot, active states, blue panels — a fill, never text on light */
+  --color-brand-hover: #00a0b3; /* hover on blue fills */
+  --color-brand-strong: #006d7c; /* blue text, links, chapter numbers, focus rings (5.6:1 on paper) */
+  --color-brand-tint: #e0f3f4; /* quiet accent surfaces, selection */
 
-  /* Tertiary */
-  --color-steel: #586a85;
-  --color-steel-tint: #e8ecf3;
-
-  /* Surfaces */
-  --color-paper: #f7f7f5;
-  --color-cream: #fefefd;
-  --color-mist: #efefec;
-  --color-night: #16191d;
+  /* Warm neutrals */
+  --color-paper: #f8f7f3; /* primary background */
+  --color-cream: #fffefa; /* the guide's "warm white": cards & raised surfaces */
+  --color-mist: #eeefe8; /* alternate section band */
+  --color-forest: #252b22; /* dark feature sections */
 
   /* Ink */
-  --color-ink: #1d2024;
-  --color-ink-soft: #5a5e64;
-  --color-ink-faint: #82868c;
+  --color-ink: #242820; /* headlines & body; also all text on blue */
+  --color-ink-soft: #62665c; /* the guide's "muted" */
+  --color-ink-faint: #858979;
+
+  /* Supporting cast, each with a job */
+  --color-sage: #e9efdf; /* human & knowledge nodes, outcome boxes */
+  --color-sage-ink: #667153; /* icons on sage */
+  --color-lavender: #eeebf5; /* tools & integration nodes */
+  --color-lavender-ink: #817197; /* icons on lavender */
+  --color-green: #587050; /* success — always with a label or checkmark */
 
   /* Lines */
-  --color-line: #e0e0dc;
-  --color-line-strong: #cbccc8;
+  --color-line: #dedfd5;
+  --color-line-strong: #cdd0c3;
 
   /* Type families */
-  --font-sans: var(--font-manrope), "Manrope", sans-serif;
+  --font-sans: var(--font-manrope), "Manrope", Arial, sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
   /* Type scale (size / line-height / tracking) */
@@ -63,9 +64,9 @@
   --text-lead--line-height: 1.8;
   --text-body: 15px;
   --text-body--line-height: 1.65;
-  --text-copy: 13px;
+  --text-copy: 14px; /* brand guide: essential content ≥ 14px */
   --text-copy--line-height: 1.9;
-  --text-small: 12px;
+  --text-small: 14px;
   --text-small--line-height: 1.9;
   --text-caption: 10px;
   --text-caption--line-height: 1.5;
@@ -81,10 +82,15 @@
   --spacing-section: 112px;
   --container-page: 1312px;
 
+  /* Rhythm: 4px base unit — use Tailwind's spacing scale (1 = 4px) */
+
+  /* Motion */
+  --default-transition-duration: 200ms;
+
   /* Shape */
   --radius-control: 5px;
   --radius-card: 11px;
-  --radius-node: 8px;
+  --radius-node: 8px; /* the guide's card radius */
 }
 
 /* shadcn/ui semantic tokens, mapped onto the laglabs palette. */
@@ -144,15 +150,15 @@
   --muted: var(--color-mist);
   --muted-foreground: var(--color-ink-soft);
   --accent: var(--color-brand);
-  --accent-foreground: var(--color-on-brand);
+  --accent-foreground: var(--color-ink);
   --destructive: oklch(0.577 0.245 27.325);
   --border: var(--color-line);
   --input: var(--color-line);
   --ring: var(--color-brand-strong);
   --chart-1: var(--color-brand);
-  --chart-2: var(--color-brand-strong);
-  --chart-3: var(--color-steel);
-  --chart-4: var(--color-lime);
+  --chart-2: var(--color-green);
+  --chart-3: var(--color-lavender-ink);
+  --chart-4: var(--color-brand-strong);
   --chart-5: var(--color-ink-soft);
   --radius: 5px;
   --sidebar: var(--color-mist);
@@ -167,32 +173,32 @@
 
 /* Dark surfaces follow the "laglabs way" section palette. */
 .dark {
-  --background: var(--color-night);
-  --foreground: var(--color-paper);
-  --card: #23282e;
-  --card-foreground: var(--color-paper);
-  --popover: #23282e;
-  --popover-foreground: var(--color-paper);
-  --primary: var(--color-paper);
+  --background: var(--color-forest);
+  --foreground: var(--color-cream);
+  --card: #2f362b;
+  --card-foreground: var(--color-cream);
+  --popover: #2f362b;
+  --popover-foreground: var(--color-cream);
+  --primary: var(--color-cream);
   --primary-foreground: var(--color-ink);
-  --secondary: #23282e;
-  --secondary-foreground: var(--color-paper);
-  --muted: #23282e;
-  --muted-foreground: #b8bcc2;
-  --accent: #00b8cc;
-  --accent-foreground: var(--color-night);
+  --secondary: #3c4834;
+  --secondary-foreground: var(--color-cream);
+  --muted: #3c4834;
+  --muted-foreground: #bec3b7;
+  --accent: var(--color-brand);
+  --accent-foreground: var(--color-ink);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: #2e333a;
-  --input: #3a4048;
-  --ring: #97c9fe;
-  --sidebar: var(--color-night);
-  --sidebar-foreground: var(--color-paper);
-  --sidebar-primary: #97c9fe;
-  --sidebar-primary-foreground: var(--color-night);
-  --sidebar-accent: #23282e;
-  --sidebar-accent-foreground: var(--color-paper);
-  --sidebar-border: #2e333a;
-  --sidebar-ring: #97c9fe;
+  --border: #464e3d;
+  --input: #59624f;
+  --ring: var(--color-brand);
+  --sidebar: var(--color-forest);
+  --sidebar-foreground: var(--color-cream);
+  --sidebar-primary: var(--color-brand);
+  --sidebar-primary-foreground: var(--color-ink);
+  --sidebar-accent: #3c4834;
+  --sidebar-accent-foreground: var(--color-cream);
+  --sidebar-border: #464e3d;
+  --sidebar-ring: var(--color-brand);
 }
 
 @layer base {

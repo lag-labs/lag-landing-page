@@ -34,7 +34,7 @@
     overflow: hidden;
   }
   ::selection {
-    background: color-mix(in oklch, var(--color-brand) 32%, white);
+    background: var(--color-brand-tint);
     color: var(--color-ink);
   }
   a {
@@ -192,7 +192,7 @@
     padding: 16px 23px;
     border: 1px solid transparent;
     border-radius: var(--radius-control);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     line-height: 1.4;
     transition:
@@ -210,31 +210,31 @@
   .button:active {
     transform: translateY(1px);
   }
-  .button-brand {
+  .button-primary {
     background: var(--color-brand);
-    color: var(--color-on-brand);
+    color: var(--color-ink);
   }
-  .button-brand:hover {
-    background: var(--color-brand-bright);
+  .button-primary:hover {
+    background: var(--color-brand-hover);
   }
   .button-dark {
     background: var(--color-ink);
     color: var(--color-cream);
   }
   .button-dark:hover {
-    background: #3c4247;
+    background: #3e4338;
   }
   .button-small {
-    min-height: 43px;
+    min-height: 44px;
     padding: 11px 17px;
-    font-size: 12px;
+    font-size: 14px;
     gap: 26px;
   }
   .text-link {
     display: inline-flex;
     align-items: center;
     gap: 17px;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     line-height: 1.5;
   }
@@ -250,7 +250,37 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--color-lime-dark);
+    background: var(--color-green);
+  }
+
+  /* 44 × 44px minimum touch target for small text controls, without changing their look. */
+  :is(
+    .wordmark,
+    .primary-nav > a:not(.button),
+    .text-link,
+    .back-top,
+    .motion-toggle,
+    .possibilities-foot a,
+    .contact-email > a
+  ) {
+    position: relative;
+  }
+  :is(
+    .wordmark,
+    .primary-nav > a:not(.button),
+    .text-link,
+    .back-top,
+    .motion-toggle,
+    .possibilities-foot a,
+    .contact-email > a
+  )::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
   }
 
   /* Navigation */
@@ -289,7 +319,7 @@
     gap: 34px;
   }
   .primary-nav > a:not(.button) {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     transition: color 0.2s;
   }
@@ -400,7 +430,7 @@
   .hero-bottom .icon {
     width: 14px;
     height: 14px;
-    color: var(--color-lime-dark);
+    color: var(--color-green);
   }
   .hero-bottom .managed-label {
     color: var(--color-ink);
@@ -425,7 +455,7 @@
     position: absolute;
     inset: -4% -3%;
     z-index: -2;
-    background-image: radial-gradient(#c5c6c1 0.8px, transparent 0.8px);
+    background-image: radial-gradient(#c2c6b8 0.8px, transparent 0.8px);
     background-size: 17px 17px;
     mask-image: radial-gradient(ellipse, black 35%, transparent 73%);
   }
@@ -435,7 +465,7 @@
     z-index: -1;
     inset: 4%;
     border-radius: 50%;
-    background: radial-gradient(ellipse, #ecece8 0%, #ecece800 65%);
+    background: radial-gradient(ellipse, #efebe0 0%, #efebe000 65%);
   }
   .visual-topline,
   .visual-caption {
@@ -444,7 +474,7 @@
     align-items: center;
     position: absolute;
     font-family: var(--font-mono);
-    color: #76797d;
+    color: #777c6f;
     font-size: 8px;
     letter-spacing: 0.045em;
   }
@@ -462,7 +492,7 @@
     font-family: var(--font-mono);
     font-size: 19px;
     font-weight: 400;
-    color: #92959a;
+    color: #929989;
   }
   .connection-lines {
     position: absolute;
@@ -472,7 +502,7 @@
     overflow: visible;
   }
   .connection {
-    stroke: #c5c7c3;
+    stroke: #c4c9ba;
     stroke-width: 1.3;
   }
   .connection-accent {
@@ -495,12 +525,12 @@
     align-items: center;
     gap: 11px;
     background: var(--color-cream);
-    border: 1px solid #e2e2de;
+    border: 1px solid #e1e2d9;
     border-radius: var(--radius-node);
     padding: 13px;
     box-shadow:
-      0 5px 15px #1d202405,
-      0 18px 40px #1d202404;
+      0 5px 15px #292e2005,
+      0 18px 40px #292e2004;
   }
   .visual-node strong {
     display: block;
@@ -524,17 +554,17 @@
     width: 18px;
     height: 18px;
   }
-  .tile-brand {
+  .tile-blue {
     background: var(--color-brand-tint);
     color: var(--color-brand-strong);
   }
-  .tile-lime {
-    background: var(--color-lime-tint);
-    color: var(--color-lime-dark);
+  .tile-sage {
+    background: var(--color-sage);
+    color: var(--color-sage-ink);
   }
-  .tile-steel {
-    background: var(--color-steel-tint);
-    color: var(--color-steel);
+  .tile-lavender {
+    background: var(--color-lavender);
+    color: var(--color-lavender-ink);
   }
   .request-node {
     left: 0;
@@ -575,11 +605,11 @@
     flex-direction: column;
     gap: 15%;
     background: var(--color-brand);
-    color: #ffffff;
+    color: var(--color-ink); /* the guide's symbol: blue tile, ink asterisk */
     border-radius: 24%;
     box-shadow:
       0 13px 22px color-mix(in srgb, var(--color-brand) 14%, transparent),
-      inset 0 0 0 1px var(--color-brand-light);
+      inset 0 0 0 1px color-mix(in oklch, var(--color-brand) 55%, white);
     transform: rotate(-8deg);
   }
   .core-mark {
@@ -591,12 +621,12 @@
   .core-face > span {
     font-size: 0.9em;
     font-weight: 600;
-    color: var(--color-on-brand);
+    color: var(--color-ink);
     letter-spacing: -0.03em;
   }
   .core-ring {
     position: absolute;
-    border: 1px solid #c8cac6;
+    border: 1px solid #c6c9bd;
     border-radius: 50%;
     pointer-events: none;
   }
@@ -607,7 +637,7 @@
   .ring-two {
     inset: -39%;
     border-style: dashed;
-    border-color: #d3d4d0;
+    border-color: #d2d5c9;
   }
   .result-node {
     display: block;
@@ -637,7 +667,7 @@
   .result-row .icon {
     width: 13px;
     height: 13px;
-    color: var(--color-lime-dark);
+    color: var(--color-green);
   }
   .result-row > span {
     margin-left: auto;
@@ -664,9 +694,9 @@
     place-items: center;
     width: 34px;
     height: 34px;
-    border: 1px solid #cacbc7;
+    border: 1px solid #cbd0c2;
     border-radius: 50%;
-    background: #ebebe7;
+    background: #e9eadd;
   }
   .human-avatar .icon {
     width: 16px;
@@ -708,7 +738,7 @@
   /* Roles */
   .possibilities {
     background: var(--color-mist);
-    border-block: 1px solid #e5e5e1;
+    border-block: 1px solid #e5e6dd;
   }
   .section-heading {
     display: flex;
@@ -722,7 +752,7 @@
   }
   .section-heading > p {
     color: var(--color-ink-soft);
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.85;
     padding-bottom: 5px;
   }
@@ -741,7 +771,7 @@
     margin-bottom: -1px;
     background: transparent;
     text-align: left;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     color: var(--color-ink-soft);
     transition:
@@ -787,9 +817,9 @@
   .role-badge {
     display: inline-block;
     padding: 5px 9px;
-    border: 1px solid #cecfcb;
+    border: 1px solid #d0d4c5;
     border-radius: 3px;
-    color: #575b61;
+    color: #59604d;
     font-family: var(--font-mono);
     font-size: 8px;
     letter-spacing: 0.06em;
@@ -802,7 +832,7 @@
   }
   .role-copy > p {
     color: var(--color-ink-soft);
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.9;
     margin-top: 16px;
     max-width: 410px;
@@ -816,7 +846,7 @@
     display: flex;
     align-items: baseline;
     gap: 10px;
-    font-size: 11px;
+    font-size: 14px;
     margin-block: 9px;
   }
   .check-list li::before {
@@ -825,18 +855,18 @@
     font-size: 14px;
   }
   .role-copy .text-link {
-    font-size: 12px;
+    font-size: 14px;
   }
   .role-copy .text-link .icon {
     width: 17px;
     height: 17px;
   }
   .workflow-card {
-    border: 1px solid #d9dad6;
+    border: 1px solid #d9dccf;
     border-radius: var(--radius-card);
     background: var(--color-paper);
     padding: 24px;
-    box-shadow: 0 12px 30px #1d202404;
+    box-shadow: 0 12px 30px #262b1904;
   }
   .workflow-top {
     display: flex;
@@ -896,7 +926,7 @@
     left: 15px;
     top: 47px;
     height: 35px;
-    border-left: 1px dashed #c7c9c5;
+    border-left: 1px dashed #c6ccbc;
   }
   .step-bullet {
     display: grid;
@@ -940,20 +970,20 @@
     color: var(--color-ink-soft);
   }
   .green-tag {
-    border-color: #dde2a6;
-    background: #eff1cc;
-    color: #5f620f;
+    border-color: #d8deca;
+    background: #eaf0e1;
+    color: #5a6f4e;
   }
   .workflow-outcome {
-    border: 1px solid #dde2a6;
+    border: 1px solid #d8deca;
     border-radius: 4px;
-    background: #f2f4d6;
+    background: var(--color-sage);
     padding: 12px 10px;
     display: flex;
     align-items: center;
     gap: 8px;
     font-size: 9px;
-    color: #5f620f;
+    color: #42583a;
   }
   .workflow-outcome .status-dot {
     width: 5px;
@@ -963,10 +993,10 @@
     display: flex;
     justify-content: space-between;
     gap: 25px;
-    border-top: 1px solid #d6d7d3;
+    border-top: 1px solid #d6d9cd;
     margin-top: 44px;
     padding-top: 20px;
-    font-size: 10px;
+    font-size: 14px;
     color: var(--color-ink-soft);
   }
   .possibilities-foot a {
@@ -1008,7 +1038,7 @@
   .process-top .icon {
     width: 18px;
     height: 18px;
-    color: #9c9fa3;
+    color: #a0a494;
   }
   .process-card h3 {
     font-size: 18px;
@@ -1019,7 +1049,7 @@
   }
   .process-card p {
     color: var(--color-ink-soft);
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.9;
   }
   .process-deliverable {
@@ -1029,12 +1059,12 @@
     text-transform: uppercase;
     font-size: 8px;
     letter-spacing: 0.015em;
-    color: #5d6167;
+    color: #616852;
   }
 
   /* Principles (dark section) */
   .difference {
-    background: var(--color-night);
+    background: var(--color-forest);
     color: var(--color-paper);
   }
   .difference-grid {
@@ -1043,21 +1073,21 @@
     gap: 100px;
   }
   .difference .eyebrow {
-    color: #a3a8ae;
+    color: #bdc3b3;
     margin-bottom: 27px;
   }
   .difference .section-index {
-    color: var(--color-brand-light);
+    color: var(--color-brand); /* 5.1:1 on forest */
   }
   .difference h2 {
     font-size: clamp(37px, 4.1vw, 60px);
   }
   .difference h2 span {
-    color: var(--color-brand-light);
+    color: #c0cbae;
   }
   .difference-copy > p:not(.eyebrow) {
-    color: #b8bcc2;
-    font-size: 13px;
+    color: #bec3b7;
+    font-size: 14px;
     max-width: 340px;
     margin-top: 25px;
     line-height: 1.9;
@@ -1074,28 +1104,28 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    border: 1px solid #444b54;
-    background: #23282e;
+    border: 1px solid #65735d;
+    background: #3c4834;
   }
   .human-equation b {
     font-weight: 400;
     font-size: 14px;
-    color: #8b9097;
+    color: #9da894;
   }
   .human-equation > .equation-ai {
     background: var(--color-brand) !important;
-    color: var(--color-night);
+    color: var(--color-forest);
     border: 0 !important;
   }
   .equation-result {
     font-size: 12px;
-    color: #d3d7dc;
+    color: #d5ddc9;
   }
   .principle {
     display: flex;
     gap: 21px;
     padding-block: 25px;
-    border-bottom: 1px solid #2e333a;
+    border-bottom: 1px solid #464e3d;
   }
   .principle:first-child {
     padding-top: 0;
@@ -1111,8 +1141,8 @@
     height: 36px;
     flex-shrink: 0;
     border-radius: 6px;
-    border: 1px solid #3a4048;
-    color: var(--color-brand-light);
+    border: 1px solid #59624f;
+    color: #c0cbae;
   }
   .principle-icon .icon {
     width: 18px;
@@ -1125,9 +1155,9 @@
     letter-spacing: -0.025em;
   }
   .principle p {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.85;
-    color: #b8bcc2;
+    color: #bec3b7;
   }
 
   /* FAQ — native <details> works without JavaScript. */
@@ -1144,7 +1174,7 @@
   }
   .faq .text-link {
     margin-top: 31px;
-    font-size: 11px;
+    font-size: 14px;
   }
   .faq .text-link .icon {
     width: 16px;
@@ -1164,7 +1194,7 @@
     padding-block: 24px;
     cursor: pointer;
     list-style: none;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 500;
   }
   .faq-list summary::-webkit-details-marker {
@@ -1202,7 +1232,7 @@
   .faq-list details > p {
     padding: 0 26px 24px 0;
     color: var(--color-ink-soft);
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.9;
   }
 
@@ -1239,16 +1269,14 @@
     line-height: 1.22;
     letter-spacing: -0.05em;
   }
-  .contact h2 span {
-    color: #ffffff; /* large text only: 3.1:1 on brand */
-  }
+  /* Ink on blue only — white on blue is 2.8:1, even for large headlines. */
   .contact-arrow {
     display: grid;
     place-items: center;
     width: 110px;
     height: 110px;
     flex-shrink: 0;
-    border: 1px solid var(--color-brand-deep);
+    border: 1px solid #24282088;
     border-radius: 50%;
     transition:
       color 0.2s,
@@ -1272,10 +1300,10 @@
     gap: 40px;
     margin-top: 37px;
     padding-top: 29px;
-    border-top: 1px solid color-mix(in oklch, var(--color-brand) 82%, black);
+    border-top: 1px solid #24282038;
   }
   .contact-bottom p {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.8;
   }
   .contact-email {
@@ -1296,14 +1324,14 @@
   .copy-email {
     display: grid;
     place-items: center;
-    width: 40px;
-    height: 40px;
-    border: 1px solid color-mix(in oklch, var(--color-brand) 70%, black);
+    width: 44px;
+    height: 44px;
+    border: 1px solid #24282088;
     border-radius: 50%;
     background: transparent;
   }
   .copy-email:hover {
-    background: var(--color-brand-bright);
+    background: var(--color-brand-hover);
   }
   .copy-email .icon {
     width: 16px;
@@ -1327,7 +1355,7 @@
     border-bottom: 1px solid var(--color-line);
   }
   .footer-top .wordmark {
-    font-size: 28px;
+    font-size: 31px;
   }
   .footer-top > p {
     font-size: 11px;
@@ -1420,13 +1448,13 @@
       gap: 19px;
     }
     .hero-actions .button {
-      font-size: 11px;
+      font-size: 14px;
       padding: 15px 17px;
       gap: 18px;
       min-height: 52px;
     }
     .hero-actions .text-link {
-      font-size: 10px;
+      font-size: 14px;
       gap: 10px;
     }
     .visual-node {
@@ -1485,17 +1513,17 @@
       height: 73px;
     }
     .wordmark {
-      font-size: 28px;
+      font-size: 30px;
     }
     .primary-nav {
       gap: 19px;
     }
     .primary-nav > a:not(.button) {
-      font-size: 10px;
+      font-size: 14px;
     }
     .primary-nav .button {
       margin-left: 0;
-      font-size: 10px;
+      font-size: 14px;
       gap: 16px;
     }
     .hero {
@@ -1521,13 +1549,13 @@
       gap: 28px;
     }
     .hero-actions .button {
-      font-size: 12px;
+      font-size: 14px;
       min-height: 56px;
       padding-inline: 22px;
       gap: 28px;
     }
     .hero-actions .text-link {
-      font-size: 12px;
+      font-size: 14px;
     }
     .hero-note {
       margin-top: 23px;
@@ -1577,7 +1605,7 @@
     }
     .section-heading > p {
       max-width: 210px;
-      font-size: 12px;
+      font-size: 14px;
     }
     .section-heading > p br {
       display: none;
@@ -1586,7 +1614,7 @@
       grid-template-columns: 1fr 1fr 1.25fr 1.5fr;
     }
     .role-tab {
-      font-size: 11px;
+      font-size: 14px;
       gap: 8px;
       padding: 17px 12px 17px 0;
     }
@@ -1602,11 +1630,11 @@
       font-size: 30px;
     }
     .role-copy > p {
-      font-size: 13px;
+      font-size: 14px;
       max-width: 500px;
     }
     .check-list li {
-      font-size: 12px;
+      font-size: 14px;
     }
     .workflow-card {
       padding: 25px;
@@ -1635,7 +1663,7 @@
       font-size: 11px;
     }
     .possibilities-foot {
-      font-size: 10px;
+      font-size: 14px;
     }
     .process-grid {
       grid-template-columns: 1fr 1fr;
@@ -1682,7 +1710,7 @@
       font-size: 14px;
     }
     .principle p {
-      font-size: 11px;
+      font-size: 14px;
     }
     .principle-icon {
       width: 29px;
@@ -1737,16 +1765,21 @@
     .nav-enhanced .menu-toggle {
       display: block;
     }
+    html:not(.nav-enhanced) .header-inner {
+      height: auto;
+      min-height: 71px;
+      padding-block: 12px;
+    }
     .primary-nav {
       gap: 10px;
       flex-wrap: wrap;
       justify-content: flex-end;
     }
     .primary-nav > a:not(.button) {
-      font-size: 9px;
+      font-size: 14px;
     }
     .primary-nav .button {
-      min-height: 32px;
+      min-height: 44px;
       padding: 8px 10px;
     }
     .primary-nav .button .icon {
@@ -1762,7 +1795,7 @@
       flex-direction: column;
       align-items: stretch;
       gap: 0;
-      box-shadow: 0 25px 30px #16191d10;
+      box-shadow: 0 25px 30px #252b2210;
     }
     .nav-enhanced .primary-nav.is-open {
       display: flex;
@@ -1813,13 +1846,13 @@
       margin-top: 24px;
     }
     .hero-actions .button {
-      font-size: 11px;
+      font-size: 14px;
       padding-inline: 17px;
       min-height: 51px;
       gap: 18px;
     }
     .hero-actions .text-link {
-      font-size: 10px;
+      font-size: 14px;
       gap: 8px;
     }
     .hero-note {
@@ -1913,6 +1946,9 @@
     .hero-bottom > span {
       gap: 5px;
     }
+    .hero-bottom strong {
+      margin-left: 0;
+    }
     .eyebrow {
       font-size: 9px;
     }
@@ -1932,7 +1968,7 @@
       margin-top: 24px;
     }
     .intro-bottom p {
-      font-size: 12px;
+      font-size: 14px;
     }
     .section-heading {
       flex-direction: column;
@@ -1945,7 +1981,7 @@
     }
     .section-heading > p {
       max-width: 290px;
-      font-size: 12px;
+      font-size: 14px;
     }
     .section-heading .eyebrow {
       margin-bottom: 19px;
@@ -1960,7 +1996,7 @@
       margin-bottom: 0;
       min-height: 52px;
       padding: 13px 0;
-      font-size: 10px;
+      font-size: 14px;
     }
     .role-tab[aria-selected="true"] {
       border-bottom-width: 2px;
@@ -1983,13 +2019,13 @@
       line-height: 1.35;
     }
     .role-copy > p {
-      font-size: 12px;
+      font-size: 14px;
     }
     .check-list li {
-      font-size: 10px;
+      font-size: 14px;
     }
     .role-copy .text-link {
-      font-size: 11px;
+      font-size: 14px;
     }
     .workflow-card {
       padding: 17px;
@@ -2034,7 +2070,7 @@
       flex-direction: column;
       gap: 14px;
       margin-top: 27px;
-      font-size: 9px;
+      font-size: 14px;
     }
     .approach .section-heading {
       margin-bottom: 35px;
@@ -2062,7 +2098,7 @@
       min-height: 49px;
     }
     .process-card p {
-      font-size: 11px;
+      font-size: 14px;
     }
     .process-deliverable {
       font-size: 7px;
@@ -2077,7 +2113,7 @@
       font-size: 43px;
     }
     .difference-copy > p:not(.eyebrow) {
-      font-size: 12px;
+      font-size: 14px;
       margin-top: 22px;
       max-width: 330px;
     }
@@ -2095,7 +2131,7 @@
       font-size: 15px;
     }
     .principle p {
-      font-size: 12px;
+      font-size: 14px;
     }
     .principle-icon {
       width: 34px;
@@ -2108,11 +2144,11 @@
       font-size: 34px;
     }
     .faq-list summary {
-      font-size: 12px;
+      font-size: 14px;
       padding-block: 22px;
     }
     .faq-list details > p {
-      font-size: 12px;
+      font-size: 14px;
     }
     .contact-inner {
       padding-block: 33px 42px;
@@ -2155,15 +2191,12 @@
       padding-top: 24px;
     }
     .contact-bottom p {
-      font-size: 11px;
+      font-size: 14px;
     }
     .contact-email > a {
       font-size: 24px;
     }
-    .copy-email {
-      width: 35px;
-      height: 35px;
-    }
+
     .site-footer {
       padding-block: 33px 22px;
     }
@@ -2173,7 +2206,7 @@
       padding-bottom: 27px;
     }
     .footer-top .wordmark {
-      font-size: 27px;
+      font-size: 31px;
     }
     .footer-top > p {
       order: 3;
