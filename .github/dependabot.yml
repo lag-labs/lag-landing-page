@@ -1,13 +1,7 @@
 version: 2
 updates:
-  - package-ecosystem: bun
-    directory: /
-    schedule:
-      interval: weekly
-    groups:
-      dependencies:
-        update-types: [minor, patch]
-
+  # Dependabot can't read Bun's current lockfile format (bun.lock v2), so npm
+  # packages are checked by `bun audit` in CI and updated by hand (`bun outdated`).
   - package-ecosystem: github-actions
     directory: /
     schedule:

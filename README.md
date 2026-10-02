@@ -65,7 +65,7 @@ Keep it that way: no client components on marketing pages, all behaviour in `src
 
 ## Deploy
 
-**GitHub Pages** (live at [laglabs.ai](https://laglabs.ai)). `.github/workflows/pages-deploy.yml` lints, builds and publishes `out/` on every push to `main` (and once every 1 January, so the footer year stays current). `.github/workflows/ci.yml` runs the same lint and build on pull requests, and Dependabot (`.github/dependabot.yml`) proposes dependency updates. The repo's Pages source is **GitHub Actions** with custom domain `laglabs.ai` (HTTPS enforced); `public/CNAME` and `public/.nojekyll` are copied into the build. The repo is public (required for Pages on the free plan), so private material such as pricing and research lives in a separate private repository: never commit it here.
+**GitHub Pages** (live at [laglabs.ai](https://laglabs.ai)). `.github/workflows/pages-deploy.yml` lints, builds and publishes `out/` on every push to `main` (and once every 1 January, so the footer year stays current). `.github/workflows/ci.yml` runs the same lint and build on pull requests, plus `bun audit`. Dependabot (`.github/dependabot.yml`) proposes updates for the GitHub Actions; it cannot read Bun's lockfile yet, so update packages by hand (`bun outdated`). The repo's Pages source is **GitHub Actions** with custom domain `laglabs.ai` (HTTPS enforced); `public/CNAME` and `public/.nojekyll` are copied into the build. The repo is public (required for Pages on the free plan), so private material such as pricing and research lives in a separate private repository: never commit it here.
 
 DNS (Cloudflare, DNS only): `A @` → `185.199.108.153`, `.109.153`, `.110.153`, `.111.153`; `AAAA @` → `2606:50c0:8000::153` … `8003::153`; `CNAME www` → `lag-labs.github.io`.
 
