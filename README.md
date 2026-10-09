@@ -1,6 +1,6 @@
 # laglabs | landing page
 
-Website for [laglabs.ai](https://laglabs.ai): custom AI employees for mid-sized companies.
+Website for [laglabs.ai](https://laglabs.ai): company operational data, de-identified and licensed to frontier AI labs.
 
 Next.js 16 (App Router, **static export**) · Tailwind CSS v4 · shadcn/ui (Base UI) · Biome · Bun · cheerio.
 
@@ -19,7 +19,7 @@ Preview the production build: `python3 -m http.server -d out 4174`.
 - `src/lib/content.ts`: all page copy, headlines included. Sections, JSON-LD and `llms.txt` render from it.
 - `src/lib/site.ts`: name, URL, email, descriptions.
 - `src/components/sections/`: page sections (all server components).
-- `src/islands/enhance.ts`: the only browser JavaScript (menu, tabs, copy button, reveals, motion toggle), bundled by Bun to `/enhance.js`.
+- `src/islands/enhance.ts`: the only browser JavaScript (menu, data source tabs, copy button, reveals, motion toggle), bundled by Bun to `/enhance.js`.
 - `scripts/check-copy.ts`: post-build guard that fails if published copy (HTML, metadata, JSON-LD, `llms.txt`, strings in `/enhance.js`) contains a dash, double hyphen or spaced hyphen (forbidden by the copy rules).
 - `scripts/strip-runtime.ts`: post-build step that removes the React/Next runtime from the export (≈1.3 KB of JS shipped instead of ≈200 KB).
 - `src/components/brand/`: brand primitives (icons, wordmark, eyebrow, buttons, links).
@@ -39,7 +39,7 @@ Everything is prerendered HTML. The build also emits:
 | `/llms.txt`, `/llms-full.txt` | Plain-text summary and full content for LLMs ([llmstxt.org](https://llmstxt.org)) |
 | `/og.png` | 1200×630 social card |
 | `/manifest.webmanifest`, `/icon.svg`, `/favicon.ico`, `/apple-touch-icon.png`, `/icon-512.png` | App metadata and icons |
-| JSON-LD in `index.html` | Organization, WebSite, WebPage, Service (+ role catalog), FAQPage |
+| JSON-LD in `index.html` | Organization, WebSite, WebPage, Service (+ data source catalog), FAQPage |
 
 ## Performance
 

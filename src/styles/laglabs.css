@@ -1020,8 +1020,8 @@
     margin-left: 10px;
   }
 
-  /* Process */
-  .approach .section-heading {
+  /* Process (and the AI labs points, which share its grid) */
+  :is(.approach, .labs) .section-heading {
     margin-bottom: 54px;
   }
   .process-grid {
@@ -1045,6 +1045,29 @@
     font-family: var(--font-mono);
     font-size: 11px;
     color: var(--color-brand-strong);
+  }
+  .labs {
+    border-top: 1px solid var(--color-line);
+  }
+  .labs + .faq {
+    border-top: 1px solid var(--color-line);
+  }
+  .labs .possibilities-foot {
+    border-top-color: var(--color-line);
+  }
+  .labs-icon {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 7px;
+    background: var(--color-brand-tint);
+    color: var(--color-brand-strong);
+  }
+  .process-top .labs-icon .icon {
+    width: 18px;
+    height: 18px;
+    color: inherit;
   }
   .process-top .icon {
     width: 18px;
@@ -2090,7 +2113,7 @@
       margin-top: 27px;
       font-size: 14px;
     }
-    .approach .section-heading {
+    :is(.approach, .labs) .section-heading {
       margin-bottom: 35px;
     }
     .process-grid {

@@ -7,41 +7,52 @@ import type { IconName } from "@/components/brand/icon";
 export type Heading = { lines: readonly string[]; accent?: string };
 
 export const nav = [
-  { label: "What we build", href: "#possibilities" },
+  { label: "What qualifies", href: "#possibilities" },
   { label: "How it works", href: "#approach" },
-  { label: "Why laglabs", href: "#why-laglabs" },
+  { label: "For AI labs", href: "#labs" },
 ] as const;
 
 export const hero = {
-  eyebrow: "A new kind of teammate",
-  heading: { lines: ["More ambition.", "Less busywork."], accent: "busywork" },
+  eyebrow: "Company data for frontier AI",
+  heading: { lines: ["Real work.", "Real revenue."], accent: "revenue" },
   description: {
-    before: "Your people have bigger things to do. We build ",
-    strong: "AI employees",
-    after:
-      " that take on the everyday work, so your team can take on what’s next.",
+    before:
+      "AI labs need to learn how real companies run. We turn the records your team already creates into ",
+    strong: "licensed, de-identified datasets",
+    after: ", and a new line of revenue for you.",
   },
-  primaryCta: "Build your AI team",
-  secondaryCta: "See what’s possible",
-  note: "Built for mid-sized companies. Designed around you.",
+  primaryCta: "See what your data is worth",
+  secondaryCta: "See what qualifies",
+  note: "You approve every dataset. You keep ownership.",
   visualLabel:
-    "Example: your tools and business knowledge connect to an AI employee, which completes routine tasks and routes decisions to your team.",
-  bottom: ["Your workflows", "Your existing tools", "Your rules"],
+    "Example: records from your systems are scoped by you, de-identified by laglabs and approved by your team before being licensed to an AI lab.",
+  bottomLead: { before: "Licensed on", strong: "your terms." },
+  bottom: ["Your scope", "Sensitive details removed", "Your approval"],
+  managed: "Handled by laglabs",
+  visual: {
+    topline: "YOUR DATA. YOUR TERMS.",
+    request: { label: "DEMAND", title: "AI labs need real work" },
+    context: { title: "Your records.", detail: "Tickets, docs, orders." },
+    tools: { title: "Your systems", detail: "Scoped by you." },
+    core: "Safe to share.",
+    result: {
+      heading: "Ready to license",
+      rows: ["Details de-identified", "Scope approved", "License signed"],
+    },
+    human: { before: "Your approval.", strong: "Before anything moves." },
+  },
 };
 
 export const intro = {
   index: "01 /",
   eyebrow: "The opportunity",
   heading: {
-    lines: [
-      "You don’t need more on your plate.",
-      "You need more on your side.",
-    ],
-    accent: "more on your side.",
+    lines: ["AI has read the internet.", "It hasn’t seen your work."],
+    accent: "It hasn’t seen your work.",
   },
   paragraphs: [
-    "The follow-ups. The copy-paste. The work between the work. It keeps good people busy without moving your business forward.",
-    "We turn those bottlenecks into AI job descriptions. Then we build the employees to fill them, with your processes, your knowledge, and your people at the center.",
+    "Frontier models learned from what’s public. What they still miss is how work actually gets done: the ticket that escalated, the order that changed, the decision behind the document.",
+    "Your company records that every day, in the tools you already use. We help you license it to AI labs, carefully and on your terms, as revenue from work you’ve already done.",
   ],
 };
 
@@ -52,13 +63,13 @@ export type WorkflowStep = {
   tag?: { label: string; tone: "neutral" | "green" };
 };
 
-export type Role = {
+export type DataSource = {
   id: string;
   tab: string;
   badge: string;
   headline: [string, string];
   description: string;
-  tasks: string[];
+  examples: string[];
   cta: { label: string; subject: string };
   workflow: {
     icon: IconName;
@@ -68,220 +79,217 @@ export type Role = {
   };
 };
 
-export const roles: Role[] = [
+export const dataSources: DataSource[] = [
   {
-    id: "sales",
-    tab: "Sales",
-    badge: "YOUR AI SALES COORDINATOR",
-    headline: ["Keep the conversation going.", "And the pipeline moving."],
+    id: "support",
+    tab: "Support",
+    badge: "SUPPORT AND SERVICE DATA",
+    headline: ["Every ticket is a lesson", "in how problems get solved."],
     description:
-      "Give every opportunity the attention it deserves. An AI teammate handles the legwork so your salespeople can focus on the relationship.",
-    tasks: [
-      "Research accounts and prepare outreach",
-      "Qualify inbound leads against your criteria",
-      "Keep CRM records and follow-ups up to date",
+      "Real conversations, escalations and resolutions show AI how good service works, including the hard cases nobody would think to write down.",
+    examples: [
+      "Ticket histories and resolution notes",
+      "Email and chat threads with customers",
+      "Escalations, macros and help center articles",
     ],
     cta: {
-      label: "Put AI to work in sales",
-      subject: "Let’s build an AI sales teammate",
+      label: "License your support data",
+      subject: "Licensing our support data",
     },
     workflow: {
-      icon: "spark",
-      title: "From new lead to next step",
+      icon: "chat",
+      title: "From help desk to dataset",
       steps: [
         {
-          icon: "mail",
-          title: "A new inquiry comes in",
-          detail: "From your inbox or website",
-          tag: { label: "Trigger", tone: "neutral" },
+          icon: "sliders",
+          title: "You choose the scope",
+          detail: "Which systems, which years, what stays out",
+          tag: { label: "Scope", tone: "neutral" },
         },
         {
           icon: "spark",
-          title: "Your AI teammate gets to work",
-          detail: "Research → qualify → prepare reply",
+          title: "laglabs prepares the data",
+          detail: "Extract → de-identify → structure",
         },
         {
           icon: "person",
-          title: "Your team takes the conversation",
-          detail: "With context, without the catch-up",
-          tag: { label: "Handoff", tone: "green" },
+          title: "You approve before it moves",
+          detail: "Review samples, then sign the license",
+          tag: { label: "Approval", tone: "green" },
         },
       ],
-      outcome: "Less admin. More time for the close.",
+      outcome: "Licensed on your terms. Paid as agreed.",
     },
   },
   {
     id: "operations",
     tab: "Operations",
-    badge: "YOUR AI OPERATIONS COORDINATOR",
-    headline: ["Less chasing updates.", "More moving things forward."],
+    badge: "OPERATIONS AND BACK OFFICE DATA",
+    headline: [
+      "Orders, invoices, exceptions.",
+      "The real shape of a business.",
+    ],
     description:
-      "Keep the everyday details from becoming everyday delays. Your AI teammate connects the dots across documents, systems, and teams.",
-    tasks: [
-      "Extract and organize information from documents",
-      "Update records across connected systems",
-      "Track requests and flag exceptions for your team",
+      "The everyday paperwork of a company shows AI how processes run end to end, across documents, systems and the people who keep them moving.",
+    examples: [
+      "Orders, invoices and purchase records",
+      "Scheduling, dispatch and project trails",
+      "Process documents, checklists and SOPs",
     ],
     cta: {
-      label: "Put AI to work in operations",
-      subject: "Let’s build an AI operations teammate",
+      label: "License your operations data",
+      subject: "Licensing our operations data",
     },
     workflow: {
       icon: "grid",
-      title: "From paperwork to progress",
+      title: "From records to a training set",
       steps: [
         {
           icon: "file",
-          title: "A document arrives",
-          detail: "An order, invoice, or request",
-          tag: { label: "Trigger", tone: "neutral" },
+          title: "You point us to the records",
+          detail: "An export or limited access you approve",
+          tag: { label: "Scope", tone: "neutral" },
         },
         {
           icon: "spark",
-          title: "Your AI teammate organizes it",
-          detail: "Extract → validate → update records",
+          title: "laglabs removes what’s sensitive",
+          detail: "Names, accounts and identifiers replaced",
         },
         {
           icon: "person",
-          title: "Exceptions go to the right person",
-          detail: "Decisions with context, not detective work",
-          tag: { label: "Review", tone: "green" },
+          title: "You sign off on the result",
+          detail: "Samples first, delivery only after approval",
+          tag: { label: "Approval", tone: "green" },
         },
       ],
-      outcome: "Keep the work flowing, not the inbox growing.",
+      outcome: "Revenue from work you’ve already done.",
     },
   },
   {
-    id: "support",
-    tab: "Customer support",
-    badge: "YOUR AI SUPPORT SPECIALIST",
-    headline: [
-      "Be there for your customers.",
-      "Give your team room to breathe.",
-    ],
+    id: "sales",
+    tab: "Sales & CRM",
+    badge: "SALES AND CRM DATA",
+    headline: ["Deals won and lost.", "Decisions AI can learn from."],
     description:
-      "Take repeat questions out of the queue. An AI teammate finds answers in your knowledge base and knows when a person should take over.",
-    tasks: [
-      "Answer routine questions using approved knowledge",
-      "Gather context and categorize incoming requests",
-      "Escalate sensitive or complex issues to your team",
+      "Pipeline history captures judgment in motion: who was contacted, what changed and why a deal moved forward or stalled.",
+    examples: [
+      "CRM history and pipeline changes",
+      "Proposals, quotes and follow-ups",
+      "Account notes and handoffs between teams",
     ],
     cta: {
-      label: "Put AI to work in support",
-      subject: "Let’s build an AI support teammate",
+      label: "License your sales data",
+      subject: "Licensing our sales and CRM data",
     },
     workflow: {
-      icon: "chat",
-      title: "From question to resolution",
+      icon: "mail",
+      title: "From pipeline to dataset",
       steps: [
         {
-          icon: "chat",
-          title: "A customer needs a hand",
-          detail: "A question in a connected support channel",
-          tag: { label: "Trigger", tone: "neutral" },
+          icon: "sliders",
+          title: "You set the boundaries",
+          detail: "Leave out pricing, key accounts, anything",
+          tag: { label: "Scope", tone: "neutral" },
         },
         {
           icon: "spark",
-          title: "Your AI teammate finds the answer",
-          detail: "Understand → retrieve → respond",
+          title: "laglabs structures the history",
+          detail: "De-identify → order events → document",
         },
         {
           icon: "person",
-          title: "People handle the personal stuff",
-          detail: "Complex cases arrive with a clear summary",
-          tag: { label: "Handoff", tone: "green" },
+          title: "Your team reviews it",
+          detail: "Nothing is shared without your yes",
+          tag: { label: "Approval", tone: "green" },
         },
       ],
-      outcome: "More attention where it makes a difference.",
+      outcome: "Your history, licensed. Your edge, kept.",
     },
   },
   {
-    id: "knowledge",
-    tab: "Knowledge & research",
-    badge: "YOUR AI RESEARCH ANALYST",
-    headline: ["Your company knows a lot.", "Put that knowledge to work."],
+    id: "engineering",
+    tab: "Engineering & IT",
+    badge: "ENGINEERING AND IT DATA",
+    headline: ["Incidents, fixes and reviews.", "How software really ships."],
     description:
-      "Turn scattered information into a useful starting point. Your AI teammate brings together research and internal knowledge, with sources your team can check.",
-    tasks: [
-      "Find answers across approved internal documents",
-      "Prepare account briefs and research summaries",
-      "Surface sources and flag missing information",
+      "Issue trackers and incident reports show AI how teams debug, prioritize and recover, with the context and back and forth that public code never shows.",
+    examples: [
+      "Issue trackers and project boards",
+      "Incident reports and postmortems",
+      "Internal docs, runbooks and wikis",
     ],
     cta: {
-      label: "Put AI to work in research",
-      subject: "Let’s build an AI research teammate",
+      label: "License your engineering data",
+      subject: "Licensing our engineering data",
     },
     workflow: {
       icon: "file",
-      title: "From scattered to actionable",
+      title: "From tracker to training set",
       steps: [
         {
-          icon: "chat",
-          title: "Your team asks a question",
-          detail: "A brief, a comparison, or a decision to make",
-          tag: { label: "Trigger", tone: "neutral" },
+          icon: "grid",
+          title: "You pick the projects",
+          detail: "Specific boards, teams or time ranges",
+          tag: { label: "Scope", tone: "neutral" },
         },
         {
           icon: "spark",
-          title: "Your AI teammate connects the dots",
-          detail: "Find → synthesize → cite sources",
+          title: "laglabs cleans and links it",
+          detail: "Strip secrets → de-identify → connect threads",
         },
         {
           icon: "person",
-          title: "Your people make the call",
-          detail: "Review the evidence and choose what’s next",
-          tag: { label: "Review", tone: "green" },
+          title: "You approve the final dataset",
+          detail: "Review before any lab sees a record",
+          tag: { label: "Approval", tone: "green" },
         },
       ],
-      outcome: "Less time searching. More informed decisions.",
+      outcome: "Years of know-how, finally valued.",
     },
   },
 ];
 
 export const possibilities = {
   index: "02 /",
-  eyebrow: "Meet the possibilities",
-  heading: { lines: ["Real roles.", "Real work off your plate."] },
+  eyebrow: "What qualifies",
+  heading: { lines: ["The work you already do.", "The data AI labs need."] },
   aside: [
-    "Start with the work that slows you down.",
-    "Build the AI teammate that moves it forward.",
+    "If your team works in software,",
+    "it’s already creating valuable data.",
   ],
-  tabsLabel: "Explore AI employee roles",
-  foot: "A starting point, not a catalog. Every role is built to fit your business.",
-  footCta: "Have something else in mind?",
+  tabsLabel: "Explore the kinds of company data AI labs license",
+  foot: "Examples, not a checklist. Every dataset is scoped with you.",
+  footCta: "Not sure what you have?",
 };
 
 export const approach = {
   index: "03 /",
-  eyebrow: "From idea to everyday impact",
-  heading: { lines: ["You know your business.", "We make AI work in it."] },
-  aside: [
-    "One partner, from the first conversation",
-    "to the work getting done.",
-  ],
+  eyebrow: "From first call to first payment",
+  heading: { lines: ["You know your data.", "We take it to market."] },
+  aside: ["One partner, from the first conversation", "to the license."],
   steps: [
     {
-      title: "Find the right work.",
-      text: "We get close to your team, map the bottlenecks, and choose a first role with a clear business case.",
-      deliverable: "A focused starting point",
+      title: "Map what you have.",
+      text: "A short call about your systems, history and industry. We tell you what AI labs are looking for and what your data could be worth.",
+      deliverable: "A clear picture, no commitment",
       icon: "diagonal",
     },
     {
-      title: "Build your teammate.",
-      text: "We shape the AI around your knowledge, connect your tools, and define what it can do and when to ask.",
-      deliverable: "Built for your reality",
+      title: "Agree the scope.",
+      text: "You decide which systems, time ranges and record types are in, and what stays out. Nothing is shared without your written approval.",
+      deliverable: "Your rules, in writing",
       icon: "diagonal",
     },
     {
-      title: "Launch with your people.",
-      text: "We test real scenarios together, bring your team into the loop, and roll out with clear checkpoints.",
-      deliverable: "Confidence before scale",
+      title: "Prepare and protect.",
+      text: "We extract, de-identify and structure the data. You review samples before any lab sees a single record.",
+      deliverable: "A dataset you’ve signed off",
       icon: "diagonal",
     },
     {
-      title: "Make it better. Repeat.",
-      text: "We manage the system, review results, and keep improving. When the first role works, we build on it.",
-      deliverable: "An ongoing partnership",
+      title: "License and get paid.",
+      text: "We match your dataset with the right AI labs, negotiate the terms and handle delivery. You get paid as agreed.",
+      deliverable: "New revenue from past work",
       icon: "loop",
     },
   ] satisfies {
@@ -294,34 +302,77 @@ export const approach = {
 
 export const difference = {
   index: "04 /",
-  eyebrow: "The laglabs way",
+  eyebrow: "Your data, your terms",
   heading: {
-    lines: ["More capable.", "Still entirely you."],
-    accent: "entirely you.",
+    lines: ["New revenue.", "Nothing given away."],
+    accent: "Nothing given away.",
   },
-  text: "Growing your capacity shouldn’t mean losing what makes your company work. We build around your people, not around a product.",
+  text: "Licensing your data shouldn’t mean losing control of it. We built laglabs around the questions every owner asks first.",
   principles: [
     {
       icon: "sliders",
-      title: "Your business is the blueprint.",
-      text: "Your terminology, your processes, your definition of a job well done. That’s where we start.",
-    },
-    {
-      icon: "grid",
-      title: "Keep the tools you know.",
-      text: "We connect to the systems your team already uses, wherever their APIs and permissions allow.",
+      title: "You decide what’s shared.",
+      text: "Systems, time ranges, record types and buyers. If it’s not in the agreed scope, it doesn’t leave.",
     },
     {
       icon: "shield",
-      title: "Your people stay in control.",
-      text: "Defined permissions, review points, and human handoffs. You decide where autonomy ends and judgment begins.",
+      title: "Sensitive details removed.",
+      text: "Names, contact details and other identifiers for customers and employees are removed or replaced before any lab sees the data.",
+    },
+    {
+      icon: "file",
+      title: "A license, not a sale.",
+      text: "You keep ownership. Labs get defined rights for defined uses, for an agreed period, written down before anything moves.",
     },
     {
       icon: "loop",
-      title: "We build it. We look after it.",
-      text: "Implementation is the beginning. We stay involved to maintain, measure, and improve the work.",
+      title: "We do the heavy lifting.",
+      text: "No engineering project for your team. We handle preparation, documentation, negotiation and delivery.",
     },
   ] satisfies { icon: IconName; title: string; text: string }[],
+};
+
+export const labs = {
+  index: "05 /",
+  eyebrow: "For AI labs",
+  heading: {
+    lines: ["Data you can’t scrape.", "Rights you can rely on."],
+  },
+  aside: [
+    "Real records of real companies at work,",
+    "licensed directly and ready to use.",
+  ],
+  points: [
+    {
+      icon: "grid",
+      title: "Real workflows.",
+      text: "Requests, decisions and exceptions across the systems companies actually use, in order and with context.",
+      label: "Beyond the public web",
+    },
+    {
+      icon: "file",
+      title: "Clean provenance.",
+      text: "Every dataset is licensed directly from the company that created it, with documented scope and permitted uses.",
+      label: "Consent on record",
+    },
+    {
+      icon: "shield",
+      title: "De-identified.",
+      text: "Personal and confidential details are removed or replaced before delivery, and every dataset comes documented.",
+      label: "Privacy built in",
+    },
+    {
+      icon: "sliders",
+      title: "Sourced to your spec.",
+      text: "Tell us the industry, systems, time range and volume you need. We find the companies that have it.",
+      label: "Training, evals and environments",
+    },
+  ] satisfies { icon: IconName; title: string; text: string; label: string }[],
+  foot: "Industries the public web doesn’t reach, from logistics to field services.",
+  cta: {
+    label: "Request a dataset",
+    subject: "Dataset request from an AI lab",
+  },
 };
 
 export const faq = {
@@ -330,48 +381,60 @@ export const faq = {
   cta: "Ask us something else",
   items: [
     {
-      q: "What exactly is an AI employee?",
-      a: "It’s a purpose-built AI system with a defined role in your business. It combines your approved knowledge, instructions, and connected tools to carry out a workflow, rather than only answer questions. Think of a sales coordinator that prepares follow-ups and updates your CRM, with your team reviewing the decisions that matter.",
+      q: "Why do AI labs pay for company data?",
+      a: "Because the public internet is largely used up, and it rarely shows how work really gets done. Labs need real records of businesses operating: requests, decisions, exceptions and outcomes across everyday tools. That data can’t be scraped or convincingly synthesized, so labs license it from the companies that create it.",
     },
     {
-      q: "How is this different from a chatbot?",
-      a: "A chatbot is often a place to ask questions. An AI employee is built to move a specific piece of work forward: gathering information, taking permitted actions in your tools, and handing off to people when needed. Conversation can be part of the experience, but the workflow is the point.",
+      q: "What kinds of company data qualify?",
+      a: "Most of the records your team creates in software: support tickets, email and chat threads, CRM history, orders and invoices, project boards, incident reports and internal documents. Years of history across several systems are usually the most valuable. What labs need changes over time, so we start with a short conversation about what you have.",
     },
     {
-      q: "Do we need an in-house AI team?",
-      a: "No. We handle the technical work, from design and integration to ongoing improvement. We do need your team’s knowledge of the business and a point person to help define success, review workflows, and give feedback.",
+      q: "Do we keep ownership of our data?",
+      a: "Yes. You license defined rights for defined uses, such as training or evaluating AI models, for an agreed period. You don’t sell or transfer ownership. The scope, permitted uses and any exclusivity are written into the agreement before anything is shared.",
     },
     {
-      q: "Will it replace our people?",
-      a: "Our starting point is giving your existing team more capacity. AI takes on repeatable work so your people can spend more time on relationships, judgment, and the work that needs their expertise. We design the division of responsibilities together.",
+      q: "How is sensitive information protected?",
+      a: "Personal and confidential details are removed or replaced before any lab sees the data. Names, contact details, account numbers and other identifiers are de-identified, and you can exclude whole systems, record types or time ranges. You review samples and approve the final dataset before it’s delivered.",
     },
     {
-      q: "How do you handle access and mistakes?",
-      a: "We define data access, allowed actions, approval requirements, and escalation paths with you before rollout. We test against real scenarios and review performance. AI can make mistakes, so sensitive actions need appropriate checks and a clear route back to a person.",
+      q: "Will anyone know the data came from us?",
+      a: "Only if you agree to it. We don’t publish the names of the companies we work with, and buyers are introduced under confidentiality. Datasets are prepared so that your customers, employees and partners can’t be identified from the records.",
     },
     {
-      q: "Where do we start, and what does it cost?",
-      a: "Start with a conversation about one workflow that’s taking too much time. We’ll explore what’s feasible and scope the role, integrations, rollout, and ongoing support. Pricing and timing depend on that scope and are agreed before any build begins.",
+      q: "Could a lab use our data to compete with us?",
+      a: "Labs license data to train and evaluate general AI models, not to enter your market. The agreement limits how the data can be used, and you can leave anything strategically sensitive, such as pricing, key accounts or product plans, out of the scope entirely.",
+    },
+    {
+      q: "How much work is this for our team?",
+      a: "Very little. After a short call, we agree the scope with you and handle extraction, de-identification, documentation, negotiation and delivery. Your team’s time goes into deciding what’s included and reviewing samples, not building pipelines. Any access we need is limited to what you approve.",
+    },
+    {
+      q: "How much could we earn, and when are we paid?",
+      a: "It depends on your industry, systems, years of history and how many labs want that kind of data. We give you an estimate after the first conversation, and the price, payment terms and schedule are agreed in writing before anything is shared. Finding out costs nothing.",
+    },
+    {
+      q: "We’re an AI lab. Can you source data to a spec?",
+      a: "Yes. Tell us the industry, systems, time range, volume and intended use, whether that’s training, fine-tuning, evaluation or agent environments. We find companies that have the data, agree the license with them, and deliver de-identified, documented datasets.",
     },
   ],
 };
 
 export const contact = {
-  eyebrow: "Let’s make room for what’s next",
+  eyebrow: "Let’s see what your data is worth",
   heading: {
-    lines: ["What would your team do", "with more possibility?"],
-    accent: "more possibility?",
+    lines: ["What could your work", "teach the next model?"],
+    accent: "teach the next model?",
   },
-  note: "BIG IDEAS. A PRACTICAL FIRST STEP.",
-  subject: "Let’s build our AI team",
-  arrowLabel: "Email laglabs to discuss your AI team",
+  note: "NO COMMITMENT. NOTHING SHARED TO FIND OUT.",
+  subject: "Licensing our company data",
+  arrowLabel: "Email laglabs about licensing your company data",
   body: [
-    "Tell us what’s slowing you down.",
-    "Let’s find your first AI employee.",
+    "Tell us about your company and your tools.",
+    "We’ll tell you what AI labs are looking for.",
   ],
 };
 
 export const footer = {
-  tagline: "Human ambition. AI on your side.",
-  closing: "Built for the way you work. And what comes next.",
+  tagline: "Real work. Better AI.",
+  closing: "Your data, licensed on your terms.",
 };

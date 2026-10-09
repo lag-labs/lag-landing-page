@@ -11,7 +11,7 @@ The site is a **fully static** Next.js export styled with Tailwind v4 + shadcn/u
 
 ## The idea behind it all
 
-**More ambition. Less busywork.** We build custom AI employees around a company's people, knowledge and tools, giving teams more capacity for what comes next. Three principles shape every decision:
+**Real work. Real revenue.** We license real operational data from companies (tickets, CRM history, orders, project trails, internal documents) to frontier AI labs: de-identified, scoped and approved by the company, which keeps ownership. Two audiences: companies are the main one (supply), AI labs the second (demand). The guide was written for the earlier positioning (custom AI employees, “More ambition. Less busywork.”); its visual system and voice still apply in full, only the story changed. Three principles shape every decision:
 
 | Principle | What it means |
 | --- | --- |
@@ -116,7 +116,7 @@ shadcn/ui is themed through the token mapping in `globals.css` (primary ink, acc
 
 Sound like a partner, not a pitch. Lead with human ambition. Explain the technology through the work it helps people do. Be warm, specific and straightforward.
 
-Positioning line: *laglabs builds custom AI employees for mid-sized companies, connected to your tools, tailored to your business, and managed by us.*
+Positioning line: *laglabs licenses your company’s operational data to frontier AI labs: de-identified, approved by you, and handled by us.*
 
 | Do | Don't |
 | --- | --- |
@@ -127,7 +127,8 @@ Positioning line: *laglabs builds custom AI employees for mid-sized companies, c
 * **Speak person to person**: “you”, “your team”, “we”. Contractions are welcome. Short sentences, jargon explained.
 * **Make the work concrete**: say what gets done. Examples, not superlatives. Only publish outcomes, claims or customer stories you can support (no invented logos, metrics, ROI, certifications, team size or pricing).
 * **Keep people in the picture**: talk about capacity, judgment and partnership; make human review and practical boundaries visible.
-* **Language to build on**: AI employees · AI teammates · your people · built around your business · more capacity.
+* **Language to build on**: operational data · how real work gets done · license, not a sale · you keep ownership · you approve · de-identified · scope · provenance · AI labs · revenue from work you’ve already done.
+* **Avoid**: “sell your data”, “marketplace”, “experts”, robotics, unhedged payout figures, and any claim we can’t support (prices, payout ranges, buyer counts, certifications such as SOC 2, eligibility thresholds) until it’s confirmed.
 * Sentence case everywhere; mono labels in UPPERCASE. Write **AI** in capitals and **laglabs** in lowercase.
 * Typography of copy: curly apostrophes and quotes (’ “ ”), arrows as glyphs (→ ↗ ↓ ↑), × for multiplication.
 
@@ -229,6 +230,6 @@ Semantic landmarks and one `h1`; `aria-labelledby` on every section; visible foc
 3. **One question, one answer**: phrase FAQs as people ask them; answer in the first sentence, 40 to 80 words, self-contained. New FAQ items flow into the `FAQPage` JSON-LD and `llms-full.txt` automatically.
 4. **Structured data**: extend the `@graph` in `src/lib/structured-data.ts` (reference entities by `@id`); only facts that are on the page.
 5. **New page**: add `export const metadata` (title, description, `alternates.canonical`), add it to `src/app/sitemap.ts`, list it in `llmsTxt()`, link to it.
-6. **Headings carry meaning**: h2 is the claim, the eyebrow is the topic. Keep entity names consistent (“laglabs”, “AI employees”, “mid-sized companies”).
+6. **Headings carry meaning**: h2 is the claim, the eyebrow is the topic. Keep entity names consistent (“laglabs”, “AI labs”, “operational data”, “license”).
 7. Keep `robots.ts` allowing search and answer-engine crawlers.
 8. **Verify**: `bun run lint && bun run build` (includes the dash guard), then check `out/index.html`, `out/llms.txt`, the JSON-LD, and that the page loads only `/enhance.js`. Serve `out/` (`python3 -m http.server -d out 4174`) and look at 1440, 1000, 700 and 390px, with and without JavaScript and with reduced motion.

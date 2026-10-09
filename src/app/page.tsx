@@ -4,6 +4,7 @@ import { Difference } from "@/components/sections/difference";
 import { Faq } from "@/components/sections/faq";
 import { Hero } from "@/components/sections/hero";
 import { Intro } from "@/components/sections/intro";
+import { Labs } from "@/components/sections/labs";
 import { Possibilities } from "@/components/sections/possibilities";
 import { SiteFooter } from "@/components/sections/site-footer";
 import { SiteHeader } from "@/components/sections/site-header";
@@ -21,6 +22,7 @@ export default function Home() {
         <Possibilities />
         <Approach />
         <Difference />
+        <Labs />
         <Faq />
         <Contact />
       </main>

@@ -84,7 +84,7 @@ export async function GET() {
               letterSpacing: "-0.064em",
             }}
           >
-            More ambition.
+            Real work.
           </div>
           <div
             style={{
@@ -95,14 +95,14 @@ export async function GET() {
               letterSpacing: "-0.064em",
             }}
           >
-            Less&nbsp;
+            Real&nbsp;
             <span
               style={{
                 color: brandStrong,
                 borderBottom: `4px solid ${brand}`,
               }}
             >
-              busywork
+              revenue
             </span>
             .
           </div>
@@ -128,8 +128,8 @@ export async function GET() {
           color: muted,
         }}
       >
-        <span>Custom AI employees for mid-sized companies.</span>
-        <span style={{ color: ink, fontWeight: 600 }}>Managed by laglabs</span>
+        <span>Company data, licensed to frontier AI labs.</span>
+        <span style={{ color: ink, fontWeight: 600 }}>On your terms</span>
       </div>
     </div>,
     {

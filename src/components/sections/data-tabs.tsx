@@ -1,14 +1,14 @@
 import { Icon } from "@/components/brand/icon";
 import { StatusDot, TextLink } from "@/components/brand/primitives";
-import { possibilities, type Role, roles } from "@/lib/content";
+import { type DataSource, dataSources, possibilities } from "@/lib/content";
 import { mailto } from "@/lib/site";
 
 /**
  * WAI-ARIA tabs rendered on the server; src/islands/enhance.ts adds the
  * click/keyboard behaviour. Every panel is in the HTML so crawlers and answer
- * engines see all four roles; without the script (the `js` class) CSS shows them all.
+ * engines see every data source; without the script (the `js` class) CSS shows them all.
  */
-export function RoleTabs() {
+export function DataTabs() {
   return (
     <div>
       <div
@@ -16,63 +16,63 @@ export function RoleTabs() {
         role="tablist"
         aria-label={possibilities.tabsLabel}
       >
-        {roles.map((role, i) => (
+        {dataSources.map((source, i) => (
           <button
-            key={role.id}
+            key={source.id}
             type="button"
             role="tab"
-            id={`tab-${role.id}`}
-            aria-controls={`panel-${role.id}`}
+            id={`tab-${source.id}`}
+            aria-controls={`panel-${source.id}`}
             aria-selected={i === 0}
             tabIndex={i === 0 ? 0 : -1}
             className="role-tab"
           >
-            <span className="tab-number">0{i + 1}</span> {role.tab}{" "}
+            <span className="tab-number">0{i + 1}</span> {source.tab}{" "}
             <Icon name="diagonal" />
           </button>
         ))}
       </div>
 
-      {roles.map((role, i) => (
+      {dataSources.map((source, i) => (
         <div
-          key={role.id}
+          key={source.id}
           role="tabpanel"
-          id={`panel-${role.id}`}
-          aria-labelledby={`tab-${role.id}`}
+          id={`panel-${source.id}`}
+          aria-labelledby={`tab-${source.id}`}
           hidden={i !== 0}
           className="role-panel"
         >
-          <RoleCopy role={role} />
-          <WorkflowCard role={role} />
+          <SourceCopy source={source} />
+          <WorkflowCard source={source} />
         </div>
       ))}
     </div>
   );
 }
 
-function RoleCopy({ role }: { role: Role }) {
+function SourceCopy({ source }: { source: DataSource }) {
   return (
     <div className="role-copy">
-      <span className="role-badge">{role.badge}</span>
+      <span className="role-badge">{source.badge}</span>
       <h3>
-        {role.headline[0]} <br />
-        {role.headline[1]}
+        {source.headline[0]} <br />
+        {source.headline[1]}
       </h3>
-      <p>{role.description}</p>
+      <p>{source.description}</p>
       <ul className="check-list">
-        {role.tasks.map((task) => (
-          <li key={task}>{task}</li>
+        {source.examples.map((example) => (
+          <li key={example}>{example}</li>
         ))}
       </ul>
-      <TextLink href={mailto(role.cta.subject)}>
-        {role.cta.label} <Icon name="diagonal" />
+      <TextLink href={mailto(source.cta.subject)}>
+        {source.cta.label} <Icon name="diagonal" />
       </TextLink>
     </div>
   );
 }
 
-function WorkflowCard({ role }: { role: Role }) {
-  const { workflow } = role;
+function WorkflowCard({ source }: { source: DataSource }) {
+  const { workflow } = source;
   return (
     <div className="workflow-card">
       <div className="workflow-top">
