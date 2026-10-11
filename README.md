@@ -24,7 +24,7 @@ Preview the production build: `python3 -m http.server -d out 4174`.
 - `scripts/strip-runtime.ts`: post-build step that removes the React/Next runtime from the export (≈1.3 KB of JS shipped instead of ≈200 KB).
 - `src/components/brand/`: brand primitives (icons, wordmark, eyebrow, buttons, links).
 - `src/app/globals.css`: design tokens and shadcn theme mapping; `src/styles/laglabs.css`: component styles (screen and print). Tailwind generates utilities from `src/` only.
-- shadcn/ui is configured (`components.json`, themed tokens) but no components are installed yet: add one with `bunx shadcn@latest add <name>` when a page needs it.
+- shadcn/ui is configured (`components.json`, themed tokens) but no components are installed yet: add one with `bunx shadcn@latest add <name>` when a page needs it. Its Tailwind stylesheet is vendored in `src/styles/shadcn-tailwind.css` (excluded from Biome), so the `shadcn` CLI package isn't a dependency.
 - `.claude/skills/laglabs-design/SKILL.md`: **the design language**: tokens, primitives, section anatomy, voice, motion, a11y and the SEO/GEO/AEO checklist. Read it before adding anything.
 - `docs/brand-guidelines.html`: the laglabs brand guidelines v1.0, source of truth for design and voice.
 

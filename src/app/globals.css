@@ -1,7 +1,7 @@
 /* Utilities are generated from src/ only (not from docs or the design skill). */
 @import "tailwindcss" source("..");
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import "../styles/shadcn-tailwind.css";
 @import "../styles/laglabs.css";
 
 @custom-variant dark (&:is(.dark *));
