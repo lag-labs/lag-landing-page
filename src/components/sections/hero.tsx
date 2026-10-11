@@ -47,7 +47,7 @@ export function Hero() {
       </div>
       <div className="wrap hero-bottom">
         <span>
-          Built around <strong>your business.</strong>
+          {hero.bottomLead.before} <strong>{hero.bottomLead.strong}</strong>
         </span>
         {hero.bottom.map((item) => (
           <span key={item}>
@@ -55,20 +55,21 @@ export function Hero() {
           </span>
         ))}
         <span className="managed-label">
-          Managed by laglabs <Icon name="spark" />
+          {hero.managed} <Icon name="spark" />
         </span>
       </div>
     </section>
   );
 }
 
-/** Illustrative workflow: knowledge + tools → AI employee → results + human. */
+/** Illustrative workflow: records + systems → laglabs → licensed dataset + human approval. */
 function WorkforceVisual() {
+  const { visual } = hero;
   return (
     <div className="workforce-visual" aria-label={hero.visualLabel} role="img">
       <div className="visual-grid" aria-hidden="true" />
       <div className="visual-topline" aria-hidden="true">
-        <span>HUMAN + AI. BETTER TOGETHER.</span>
+        <span>{visual.topline}</span>
         <span className="crosshair">+</span>
       </div>
       <svg
@@ -103,8 +104,8 @@ function WorkforceVisual() {
           <Icon name="mail" />
         </span>
         <div>
-          <span className="micro-label">INCOMING</span>
-          <strong>A new opportunity</strong>
+          <span className="micro-label">{visual.request.label}</span>
+          <strong>{visual.request.title}</strong>
         </div>
       </div>
       <div className="visual-node context-node" aria-hidden="true">
@@ -112,8 +113,8 @@ function WorkforceVisual() {
           <Icon name="file" />
         </span>
         <div>
-          <strong>Your knowledge.</strong>
-          <span>Your way of working.</span>
+          <strong>{visual.context.title}</strong>
+          <span>{visual.context.detail}</span>
         </div>
       </div>
       <div className="visual-node tools-node" aria-hidden="true">
@@ -121,8 +122,8 @@ function WorkforceVisual() {
           <Icon name="grid" />
         </span>
         <div>
-          <strong>Your tools</strong>
-          <span>Already connected.</span>
+          <strong>{visual.tools.title}</strong>
+          <span>{visual.tools.detail}</span>
         </div>
       </div>
       <div className="ai-core" aria-hidden="true">
@@ -132,27 +133,26 @@ function WorkforceVisual() {
           <svg className="core-mark" aria-hidden="true">
             <use href="#i-mark" />
           </svg>
-          <span>AI, on your team.</span>
+          <span>{visual.core}</span>
         </div>
       </div>
       <div className="visual-node result-node" aria-hidden="true">
         <div className="result-heading">
-          <span className="status-dot" /> Moving work forward
+          <span className="status-dot" /> {visual.result.heading}
         </div>
-        {["Request qualified", "CRM updated", "Follow-up prepared"].map(
-          (row, i) => (
-            <div key={row} className="result-row">
-              <Icon name="check" /> {row} <span>0{i + 1}</span>
-            </div>
-          ),
-        )}
+        {visual.result.rows.map((row, i) => (
+          <div key={row} className="result-row">
+            <Icon name="check" /> {row} <span>0{i + 1}</span>
+          </div>
+        ))}
       </div>
       <div className="human-node" aria-hidden="true">
         <span className="human-avatar">
           <Icon name="person" />
         </span>
         <div>
-          Human judgment.<strong>Always in the loop.</strong>
+          {visual.human.before}
+          <strong>{visual.human.strong}</strong>
         </div>
       </div>
       <div className="visual-caption" aria-hidden="true">

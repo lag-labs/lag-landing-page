@@ -1,6 +1,6 @@
 import { Eyebrow, Headline, Lines } from "@/components/brand/primitives";
 import { possibilities } from "@/lib/content";
-import { RoleTabs } from "./role-tabs";
+import { DataTabs } from "./data-tabs";
 
 export function Possibilities() {
   return (
@@ -23,7 +23,7 @@ export function Possibilities() {
             <Lines lines={possibilities.aside} />
           </p>
         </div>
-        <RoleTabs />
+        <DataTabs />
         <div className="possibilities-foot">
           <span>{possibilities.foot}</span>
           <a href="#contact">

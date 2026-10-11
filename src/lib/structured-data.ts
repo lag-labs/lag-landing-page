@@ -1,4 +1,4 @@
-import { approach, faq, roles } from "@/lib/content";
+import { approach, dataSources, faq } from "@/lib/content";
 import { site } from "@/lib/site";
 
 // One linked @graph so search and answer engines can resolve the entities.
@@ -24,11 +24,11 @@ export function structuredData() {
         slogan: site.tagline,
         description: site.summary,
         knowsAbout: [
-          "AI employees",
-          "AI agents",
-          "Workflow automation",
+          "AI training data",
+          "Data licensing",
+          "Data de-identification",
+          "Operational data",
           "Large language models",
-          "Systems integration",
         ],
         contactPoint: {
           "@type": "ContactPoint",
@@ -62,23 +62,27 @@ export function structuredData() {
       {
         "@type": "Service",
         "@id": id("service"),
-        name: "Custom AI employees",
-        serviceType: "AI employee design, implementation and management",
+        name: "Company data licensing for AI",
+        serviceType:
+          "AI training data sourcing, de-identification and licensing",
         description: site.summary,
         provider: { "@id": id("organization") },
-        audience: {
-          "@type": "BusinessAudience",
-          audienceType: "Mid-sized companies",
-        },
+        audience: [
+          {
+            "@type": "BusinessAudience",
+            audienceType: "Companies with operational data",
+          },
+          { "@type": "BusinessAudience", audienceType: "AI labs" },
+        ],
         hasOfferCatalog: {
           "@type": "OfferCatalog",
-          name: "Example AI employee roles",
-          itemListElement: roles.map((role) => ({
+          name: "Kinds of company data licensed to AI labs",
+          itemListElement: dataSources.map((source) => ({
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: titleCase(role.badge.replace(/^YOUR /, "")),
-              description: `${role.description} Typical tasks: ${role.tasks.join("; ")}.`,
+              name: `${source.tab} data`,
+              description: `${source.description} Examples: ${source.examples.join("; ")}.`,
             },
           })),
         },
@@ -91,7 +95,7 @@ export function structuredData() {
       {
         "@type": "ItemList",
         "@id": id("process"),
-        name: "How laglabs builds an AI employee",
+        name: "How laglabs licenses company data to AI labs",
         itemListOrder: "https://schema.org/ItemListOrderAscending",
         itemListElement: approach.steps.map((step, i) => ({
           "@type": "ListItem",
@@ -111,11 +115,4 @@ export function structuredData() {
       },
     ],
   };
-}
-
-function titleCase(value: string) {
-  return value
-    .toLowerCase()
-    .replace(/\b(ai)\b/g, "AI")
-    .replace(/(^|\s)\S/g, (char) => char.toUpperCase());
 }
